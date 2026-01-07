@@ -19,14 +19,15 @@ const BenchmarksSlide = () => {
     const [activeSample, setActiveSample] = useState(samples[0]);
 
     const getImagePath = (model: any) => {
+        const baseUrl = import.meta.env.BASE_URL;
         if (model.type === 'ours') {
-            return `/comparison/solar${activeSample.id}.jpg`;
+            return `${baseUrl}comparison/solar${activeSample.id}.jpg`;
         }
         // Model 3 only has 1 and 833 according to user description
         if (model.name === 'Model 3 (Roboflow)' && activeSample.id === '2545') {
             return null;
         }
-        return `/comparison/${model.imagePrefix}${activeSample.id}.png`;
+        return `${baseUrl}comparison/${model.imagePrefix}${activeSample.id}.png`;
     };
 
     return (
