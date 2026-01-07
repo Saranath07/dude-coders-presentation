@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { Database, Sparkles, Layers, X, Check, ArrowRight, Plus } from 'lucide-react';
+import { Database, Sparkles, Layers, X, ArrowRight, Plus } from 'lucide-react';
 
 // Animated Icon that pulses
 const PulsingIcon = ({ Icon, delay }: { Icon: React.ElementType; delay: number }) => (
