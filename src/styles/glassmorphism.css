@@ -16,13 +16,14 @@
 
     /* Accent Colors - Green Energy / Solar */
     --accent-green: #22c55e;
-    /* Sustainable green */
     --accent-green-light: #4ade80;
     --accent-amber: #f59e0b;
-    /* Solar gold */
     --accent-amber-light: #fbbf24;
     --accent-cyan: #06b6d4;
-    /* Tech blue */
+
+    /* Legacy/Slide specific variables to be themed */
+    --solar-gold: #fbbf24;
+    --light-blue: #06b6d4;
 
     /* Text */
     --text-primary: #ffffff;
@@ -37,6 +38,70 @@
     /* Gradients */
     --gradient-solar: linear-gradient(135deg, #f59e0b 0%, #22c55e 100%);
     --gradient-dark: linear-gradient(180deg, #0a0a0a 0%, #141414 100%);
+
+    --nav-bg: rgba(20, 20, 20, 0.7);
+    --accent-red: #ef4444;
+    --solar-panel-blue: #1a237e;
+    --pool-blue: #0288d1;
+
+    /* Architecture Specific - Dark Theme (Original professional colors) */
+    --arch-backbone: #06b6d4;
+    /* Cyan */
+    --arch-neck: #22c55e;
+    /* Green */
+    --arch-head: #a855f7;
+    /* Purple */
+    --arch-attention: #f59e0b;
+    /* Amber */
+}
+
+[data-theme='light'] {
+    /* Core Colors - Clean & Sophisticated */
+    --bg-primary: #f8fafc;
+    --bg-secondary: #f1f5f9;
+    --bg-card: #ffffff;
+
+    /* Accent Colors - High-Tech Blue & Slate */
+    --accent-green: #2563eb;
+    /* Electric Blue */
+    --accent-green-light: #60a5fa;
+    --accent-amber: #64748b;
+    /* Cool Slate */
+    --accent-amber-light: #94a3b8;
+    --accent-cyan: #0284c7;
+
+    /* Theme overrides for slides */
+    --solar-gold: #1e293b;
+    --light-blue: #3b82f6;
+
+    /* Architecture Specific - Premium Colors */
+    --arch-backbone: #0284c7;
+    /* Cyan-Blue */
+    --arch-neck: #7c3aed;
+    /* Violet */
+    --arch-head: #db2777;
+    /* Pink-Red */
+    --arch-attention: #ea580c;
+    /* Orange-Red */
+
+    /* Text */
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+
+    /* Borders & Glass - Deeper Depth */
+    --border-subtle: rgba(15, 23, 42, 0.08);
+    --border-accent: rgba(37, 99, 235, 0.15);
+    --glass-bg: rgba(255, 255, 255, 0.88);
+
+    /* Gradients - Mesh style */
+    --gradient-solar: linear-gradient(135deg, #1e293b 0%, #2563eb 100%);
+    --gradient-dark: radial-gradient(circle at top right, #f8fafc, #f1f5f9);
+
+    --nav-bg: rgba(255, 255, 255, 0.92);
+    --accent-red: #dc2626;
+    --solar-panel-blue: #1d4ed8;
+    --pool-blue: #38bdf8;
 }
 
 /* ============================================
@@ -65,6 +130,56 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.4;
+    background-image:
+        linear-gradient(var(--border-subtle) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+[data-theme='light'] body::before {
+    opacity: 0.12;
+    background-image:
+        radial-gradient(var(--border-subtle) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+.bg-glow {
+    position: fixed;
+    width: 60vw;
+    height: 60vw;
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: -2;
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.bg-glow.gold {
+    top: -20%;
+    right: -10%;
+    background: var(--accent-amber);
+}
+
+.bg-glow.blue {
+    bottom: -20%;
+    left: -10%;
+    background: var(--accent-cyan);
+}
+
+[data-theme='dark'] .bg-glow {
+    opacity: 0.1;
 }
 
 /* ============================================
@@ -316,7 +431,7 @@ p {
     display: flex;
     gap: 5px;
     z-index: 100;
-    background: rgba(20, 20, 20, 0.7);
+    background: var(--nav-bg);
     padding: 6px 12px;
     border-radius: 16px;
     border: 1px solid var(--border-subtle);
@@ -356,20 +471,21 @@ p {
    ============================================ */
 .callout {
     padding: 24px 32px;
-    border-left: 3px solid var(--accent-green);
-    background: rgba(34, 197, 94, 0.05);
-    border-radius: 0 12px 12px 0;
+    border-left: 4px solid var(--accent-green);
+    background: var(--border-accent);
+    border-radius: 4px 16px 16px 4px;
     margin: 24px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
 }
 
 .callout.warning {
     border-left-color: var(--accent-amber);
-    background: rgba(245, 158, 11, 0.05);
+    background: rgba(100, 116, 139, 0.05);
 }
 
 .callout.success {
     border-left-color: var(--accent-green);
-    background: rgba(34, 197, 94, 0.08);
+    background: var(--border-accent);
 }
 
 /* ============================================

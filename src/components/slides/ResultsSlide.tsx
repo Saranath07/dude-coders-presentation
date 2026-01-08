@@ -16,61 +16,60 @@ const AnimatedCounter = ({ target, duration = 1.2 }: { target: number; duration?
     return <span>{count.toFixed(2)}</span>;
 };
 
-// Compact Animated Bar Chart
 const AnimatedBarChart = () => {
-    const [animated, setAnimated] = useState(false);
-    useEffect(() => { setTimeout(() => setAnimated(true), 400); }, []);
-
     const bars = [
-        { label: 'Traditional', value: 0.54, color: '#ef4444' },
-        { label: 'YOLOv12', value: 0.85, color: '#f59e0b' },
-        { label: '+ Cascade', value: 0.95, color: '#22c55e' },
+        { label: 'Traditional', value: 0.54, color: '#9ca3af' },
+        { label: 'YOLOv12', value: 0.85, color: '#22c55e' },
+        { label: '+ Cascade', value: 0.95, color: '#16a34a' },
     ];
 
     return (
-        <div style={{ display: 'flex', alignItems: 'flex-end', gap: '24px', height: '120px', justifyContent: 'center' }}>
+        <div style={{
+            display: 'flex',
+            alignItems: 'flex-end',
+            gap: '24px',
+            height: '140px',
+            justifyContent: 'center',
+            paddingBottom: '30px'
+        }}>
             {bars.map((bar, i) => (
-                <motion.div
+                <div
                     key={bar.label}
-                    initial={{ height: 0 }}
-                    animate={{ height: animated ? `${bar.value * 120}px` : 0 }}
-                    transition={{ delay: 0.2 + i * 0.2, duration: 0.6, ease: 'easeOut' }}
                     style={{
                         width: '60px',
-                        background: `linear-gradient(180deg, ${bar.color}, ${bar.color}88)`,
+                        height: `${bar.value * 100}px`,
+                        background: `linear-gradient(180deg, ${bar.color}, ${bar.color}cc)`,
                         borderRadius: '6px 6px 0 0',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'flex-start',
-                        paddingTop: '6px',
+                        paddingTop: '8px',
                         position: 'relative',
                     }}
                 >
-                    <motion.span
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.6 + i * 0.2 }}
-                        style={{ fontWeight: 700, fontSize: '1rem', color: '#fff' }}
-                    >
+                    <span style={{ fontWeight: 700, fontSize: '1rem', color: '#fff' }}>
                         {bar.value.toFixed(2)}
-                    </motion.span>
+                    </span>
                     <span style={{
-                        position: 'absolute', bottom: '-24px',
-                        fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', whiteSpace: 'nowrap'
+                        position: 'absolute',
+                        bottom: '-26px',
+                        fontSize: '0.85rem',
+                        color: 'var(--text-secondary)',
+                        whiteSpace: 'nowrap'
                     }}>
                         {bar.label}
                     </span>
-                </motion.div>
+                </div>
             ))}
         </div>
     );
 };
 
 const transformations = [
-    { label: 'Traditional IP', value: 0.54, color: '#ef4444' },
-    { label: 'Base YOLOv12', value: 0.85, color: '#f59e0b' },
-    { label: '+ Cascade', value: 0.95, color: '#22c55e' },
+    { label: 'Traditional IP', value: 0.54, color: 'var(--text-muted)' },
+    { label: 'Base YOLOv12', value: 0.85, color: 'var(--accent-green-light)' },
+    { label: '+ Cascade', value: 0.95, color: 'var(--accent-green)' },
 ];
 
 const ResultsSlide = () => {
@@ -135,14 +134,14 @@ const ResultsSlide = () => {
                         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                             <thead>
                                 <tr>
-                                    <th style={{ textAlign: 'left', padding: '8px', borderBottom: '1px solid #22c55e', color: '#22c55e', fontSize: '0.9rem' }}>Model</th>
-                                    <th style={{ textAlign: 'right', padding: '8px', borderBottom: '1px solid #22c55e', color: '#22c55e', fontSize: '0.9rem' }}>F1 Score</th>
+                                    <th style={{ textAlign: 'left', padding: '8px', borderBottom: '2px solid var(--accent-green)', color: 'var(--accent-green)', fontSize: '0.9rem' }}>Model</th>
+                                    <th style={{ textAlign: 'right', padding: '8px', borderBottom: '2px solid var(--accent-green)', color: 'var(--accent-green)', fontSize: '0.9rem' }}>F1 Score</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {[
-                                    { model: 'UNet Baseline', score: 0.82 },
-                                    { model: 'YOLOv8-seg', score: 0.88 },
+                                    { model: 'UNet Baseline', score: 0.75 },
+                                    { model: 'YOLOv8-seg', score: 0.8 },
                                     { model: 'Our YOLOv12 + Cascade', score: 0.95, highlight: true },
                                 ].map((row, i) => (
                                     <motion.tr
@@ -150,14 +149,14 @@ const ResultsSlide = () => {
                                         initial={{ opacity: 0, x: -20 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: 1.1 + i * 0.1 }}
-                                        style={{ background: row.highlight ? 'rgba(34, 197, 94, 0.1)' : 'transparent' }}
+                                        style={{ background: row.highlight ? 'var(--glass-bg)' : 'transparent' }}
                                     >
                                         <td style={{ padding: '10px 8px', borderBottom: '1px solid rgba(255,255,255,0.06)', fontSize: '1rem', fontWeight: row.highlight ? 600 : 400 }}>
                                             {row.model} {row.highlight && '🏆'}
                                         </td>
                                         <td style={{
-                                            padding: '10px 8px', borderBottom: '1px solid rgba(255,255,255,0.06)', textAlign: 'right',
-                                            fontWeight: 700, color: row.highlight ? '#22c55e' : 'inherit', fontSize: row.highlight ? '1.1rem' : '1rem',
+                                            padding: '10px 8px', borderBottom: '1px solid var(--border-subtle)', textAlign: 'right',
+                                            fontWeight: 700, color: row.highlight ? 'var(--accent-green)' : 'inherit', fontSize: row.highlight ? '1.1rem' : '1rem',
                                         }}>
                                             {row.score.toFixed(2)}
                                         </td>
@@ -168,7 +167,7 @@ const ResultsSlide = () => {
                     </motion.div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

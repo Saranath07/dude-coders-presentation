@@ -5,7 +5,6 @@ import { Trophy, Info } from 'lucide-react';
 const samples = [
     { id: '1', title: 'Sample #1 (Complex Urban)' },
     { id: '833', title: 'Sample #833 (Multi-Panel Complex)' },
-    { id: '2545', title: 'Sample #2545 (Scale Challenge)' },
 ];
 
 const models = [
@@ -22,10 +21,6 @@ const BenchmarksSlide = () => {
         const baseUrl = import.meta.env.BASE_URL;
         if (model.type === 'ours') {
             return `${baseUrl}comparison/solar${activeSample.id}.jpg`;
-        }
-        // Model 3 only has 1 and 833 according to user description
-        if (model.name === 'Model 3 (Roboflow)' && activeSample.id === '2545') {
-            return null;
         }
         return `${baseUrl}comparison/${model.imagePrefix}${activeSample.id}.png`;
     };
@@ -61,7 +56,7 @@ const BenchmarksSlide = () => {
                             style={{
                                 padding: '12px 24px',
                                 border: `2px solid ${activeSample.id === sample.id ? 'var(--accent-green)' : 'transparent'}`,
-                                background: activeSample.id === sample.id ? 'rgba(34, 197, 94, 0.15)' : 'rgba(255, 255, 255, 0.05)',
+                                background: activeSample.id === sample.id ? 'var(--border-accent)' : 'var(--glass-bg)',
                                 color: activeSample.id === sample.id ? 'var(--accent-green)' : 'var(--text-secondary)',
                                 cursor: 'pointer',
                                 transition: 'all 0.3s ease',
@@ -97,7 +92,7 @@ const BenchmarksSlide = () => {
                                         position: 'relative',
                                         overflow: 'hidden',
                                         border: model.type === 'ours' ? '2px solid var(--accent-green)' : '1px solid var(--border-subtle)',
-                                        boxShadow: model.type === 'ours' ? '0 0 30px rgba(34, 197, 94, 0.2)' : 'none'
+                                        boxShadow: model.type === 'ours' ? '0 0 30px var(--border-accent)' : 'none'
                                     }}
                                 >
                                     {/* Badge */}
@@ -107,13 +102,13 @@ const BenchmarksSlide = () => {
                                         left: 0,
                                         right: 0,
                                         padding: '10px',
-                                        background: model.type === 'ours' ? 'rgba(34, 197, 94, 0.9)' : 'rgba(0,0,0,0.6)',
+                                        background: model.type === 'ours' ? 'var(--accent-green)' : 'var(--nav-bg)',
                                         zIndex: 2,
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
                                         gap: '8px',
-                                        color: '#fff',
+                                        color: model.type === 'ours' ? '#fff' : 'var(--text-primary)',
                                         fontWeight: 700,
                                         fontSize: '0.9rem'
                                     }}>
@@ -125,7 +120,7 @@ const BenchmarksSlide = () => {
                                     <div style={{
                                         width: '100%',
                                         height: '100%',
-                                        background: '#0a0a0a',
+                                        background: 'var(--bg-secondary)',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center'

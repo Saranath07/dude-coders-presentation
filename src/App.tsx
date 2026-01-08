@@ -11,6 +11,7 @@ import ResultsSlide from './components/slides/ResultsSlide';
 import BenchmarksSlide from './components/slides/BenchmarksSlide';
 import ConclusionSlide from './components/slides/ConclusionSlide';
 import RedirectSlide from './components/slides/RedirectSlide';
+import ThemeToggle from './components/ThemeToggle';
 import './styles/glassmorphism.css';
 
 const slides = [
@@ -56,6 +57,15 @@ const slideVariants = {
 function App() {
   const [[currentSlide, direction], setSlide] = useState([0, 0]);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   const paginate = useCallback((newDirection: number) => {
     const nextSlide = currentSlide + newDirection;
@@ -63,11 +73,6 @@ function App() {
       setSlide([nextSlide, newDirection]);
     }
   }, [currentSlide]);
-
-  const goToSlide = (index: number) => {
-    const direction = index > currentSlide ? 1 : -1;
-    setSlide([index, direction]);
-  };
 
   // Toggle fullscreen
   const toggleFullscreen = useCallback(() => {
@@ -134,6 +139,9 @@ function App() {
         </motion.div>
       </AnimatePresence>
 
+      {/* Theme Toggle */}
+      <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+
       {/* Fullscreen button */}
       <motion.button
         onClick={toggleFullscreen}
@@ -144,30 +152,56 @@ function App() {
           top: '16px',
           right: '16px',
           zIndex: 1000,
-          background: 'rgba(255, 255, 255, 0.1)',
-          border: '1px solid rgba(255, 255, 255, 0.2)',
-          borderRadius: '8px',
-          padding: '8px 12px',
-          color: 'rgba(255, 255, 255, 0.6)',
+          background: 'var(--glass-bg)',
+          border: '1px solid var(--border-subtle)',
+          borderRadius: '12px',
+          padding: '8px 16px',
+          color: 'var(--text-secondary)',
           fontSize: '0.75rem',
+          fontWeight: 600,
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
-          gap: '6px',
+          gap: '8px',
           transition: 'all 0.2s',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
         }}
-        whileHover={{ background: 'rgba(255, 255, 255, 0.15)', color: '#fff' }}
+        whileHover={{ background: 'var(--border-accent)', color: 'var(--text-primary)' }}
       >
         {isFullscreen ? '⛶ Exit (F)' : '⛶ Fullscreen (F)'}
       </motion.button>
 
-      {/* Navigation dots */}
-      <div className="nav-container">
-        {slides.map((_, index) => (
-          <div
-            key={index}
-            className={`nav-dot ${index === currentSlide ? 'active' : ''}`}
-            onClick={() => goToSlide(index)}
+      {/* Dynamic Progress Bar at bottom */}
+      <div style={{
+        position: 'fixed',
+        bottom: '24px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        display: 'flex',
+        gap: '8px',
+        padding: '8px 14px',
+        background: 'var(--glass-bg)',
+        border: '1px solid var(--border-subtle)',
+        borderRadius: '20px',
+        zIndex: 1000,
+        boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+      }}>
+        {slides.map((_, i) => (
+          <motion.div
+            key={i}
+            onClick={() => setSlide([i, i > currentSlide ? 1 : -1])}
+            whileHover={{ scale: 1.2 }}
+            style={{
+              width: i === currentSlide ? '24px' : '8px',
+              height: '8px',
+              borderRadius: '4px',
+              background: i === currentSlide ? 'var(--accent-green)' : 'var(--border-subtle)',
+              cursor: 'pointer',
+              transition: 'all 0.5s cubic-bezier(0.19, 1, 0.22, 1)',
+            }}
           />
         ))}
       </div>

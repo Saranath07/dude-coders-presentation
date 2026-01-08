@@ -1,35 +1,65 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Loader2 } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 const RedirectSlide = () => {
-    useEffect(() => {
-        // Hard redirect to the external site
-        const timer = setTimeout(() => {
-            window.location.href = "https://shriprasad15.github.io/Dude-Coders-Ideathon/";
-        }, 2000);
-
-        return () => clearTimeout(timer);
-    }, []);
-
     return (
-        <div className="slide-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+        <div className="slide-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
             <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="glass-card"
-                style={{ padding: '60px', maxWidth: '600px' }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                style={{
+                    width: '100%',
+                    maxWidth: '1400px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '16px',
+                    height: '90vh'
+                }}
             >
-                <div style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'center' }}>
-                    <Loader2 size={60} className="animate-spin" color="var(--accent-green)" />
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    padding: '12px 20px',
+                    background: 'var(--glass-bg)',
+                    borderRadius: '12px',
+                    border: '1px solid var(--border-subtle)'
+                }}>
+                    <ExternalLink size={20} color="var(--accent-green)" />
+                    <span style={{ fontSize: '1.1rem', fontWeight: 600 }}>Project Landing Page</span>
+                    <a
+                        href="https://shriprasad15.github.io/Dude-Coders-Ideathon/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                            marginLeft: 'auto',
+                            color: 'var(--accent-green)',
+                            textDecoration: 'none',
+                            fontSize: '0.9rem'
+                        }}
+                    >
+                        Open in new tab ↗
+                    </a>
                 </div>
-                <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>Finalizing...</h2>
-                <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-                    Redirecting to the official project landing page
-                </p>
-                <div className="glass-card-static" style={{ padding: '12px 24px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                    <ExternalLink size={20} />
-                    <span>shriprasad15.github.io/Dude-Coders-Ideathon</span>
+
+                <div className="glass-card" style={{
+                    flex: 1,
+                    padding: 0,
+                    overflow: 'hidden',
+                    display: 'flex',
+                    flexDirection: 'column'
+                }}>
+                    <iframe
+                        src="https://shriprasad15.github.io/Dude-Coders-Ideathon/"
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            border: 'none',
+                            borderRadius: '12px'
+                        }}
+                        title="Project Landing Page"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                    />
                 </div>
             </motion.div>
         </div>

@@ -19,7 +19,7 @@ const HoughTransformDemo = () => {
                 style={{
                     width: '100%',
                     height: '100%',
-                    background: 'linear-gradient(135deg, #3a5a40 0%, #588157 50%, #a3b18a 100%)',
+                    background: 'var(--bg-secondary)',
                     borderRadius: '12px',
                     position: 'relative',
                     overflow: 'hidden',
@@ -48,8 +48,8 @@ const HoughTransformDemo = () => {
                         left: '25%',
                         width: '20%',
                         height: '25%',
-                        background: '#1a237e',
-                        border: step >= 2 ? '2px solid #4CAF50' : 'none',
+                        background: 'var(--solar-panel-blue)',
+                        border: step >= 2 ? '2px solid var(--accent-green)' : 'none',
                     }}
                 />
 
@@ -63,9 +63,9 @@ const HoughTransformDemo = () => {
                         left: '55%',
                         width: '25%',
                         height: '20%',
-                        background: '#0288d1',
+                        background: 'var(--pool-blue)',
                         borderRadius: '4px',
-                        border: step >= 2 ? '2px solid #f44336' : 'none',
+                        border: step >= 2 ? '2px solid var(--accent-red)' : 'none',
                     }}
                 />
 
@@ -82,7 +82,7 @@ const HoughTransformDemo = () => {
                                 left: '25%',
                                 width: '20%',
                                 height: '2px',
-                                background: '#FFB703',
+                                background: 'var(--accent-amber)',
                                 transformOrigin: 'left',
                             }}
                         />
@@ -110,7 +110,7 @@ const HoughTransformDemo = () => {
                                 left: '55%',
                                 width: '25%',
                                 height: '2px',
-                                background: '#f44336',
+                                background: 'var(--accent-red)',
                                 transformOrigin: 'left',
                             }}
                         />
@@ -127,7 +127,7 @@ const HoughTransformDemo = () => {
                                 position: 'absolute',
                                 top: '25%',
                                 left: '22%',
-                                background: '#4CAF50',
+                                background: 'var(--accent-green)',
                                 color: 'white',
                                 padding: '2px 6px',
                                 borderRadius: '4px',
@@ -144,7 +144,7 @@ const HoughTransformDemo = () => {
                                 position: 'absolute',
                                 top: '52%',
                                 left: '58%',
-                                background: '#f44336',
+                                background: 'var(--accent-red)',
                                 color: 'white',
                                 padding: '2px 6px',
                                 borderRadius: '4px',
@@ -183,8 +183,8 @@ const TraditionalMethodSlide = () => {
                             <h3 style={{ marginBottom: '12px' }}>The Hypothesis</h3>
                             <p style={{ fontStyle: 'italic' }}>
                                 "Panels are blue rectangles with distinct edges—let's use{' '}
-                                <strong style={{ color: 'var(--solar-gold)' }}>Hough Transform</strong> +{' '}
-                                <strong style={{ color: 'var(--solar-gold)' }}>Color Thresholding</strong>!"
+                                <strong style={{ color: 'var(--accent-green)' }}>Hough Transform</strong> +{' '}
+                                <strong style={{ color: 'var(--accent-green)' }}>Color Thresholding</strong>!"
                             </p>
                         </div>
 
@@ -193,14 +193,14 @@ const TraditionalMethodSlide = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5, duration: 0.5 }}
                         >
-                            <h3 style={{ marginBottom: '16px', color: 'var(--solar-orange)' }}>Why It Failed</h3>
+                            <h3 style={{ marginBottom: '16px', color: 'var(--accent-amber)' }}>Why It Failed</h3>
                             <ul className="feature-list">
                                 <motion.li
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.6 }}
                                 >
-                                    <span><strong style={{ color: '#f44336' }}>False Positives:</strong> Swimming pools, tarps, skylights</span>
+                                    <span><strong style={{ color: 'var(--accent-red)' }}>False Positives:</strong> Swimming pools, tarps, skylights</span>
                                 </motion.li>
                                 <motion.li
                                     initial={{ opacity: 0, x: -20 }}

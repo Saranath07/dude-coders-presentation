@@ -12,7 +12,7 @@ const TitleSlide = () => {
                     transition={{ duration: 0.8, ease: 'easeOut' }}
                     style={{ marginBottom: '2rem' }}
                 >
-                    <Sun size={80} color="#FFB703" className="animate-glow" />
+                    <Sun size={80} color="var(--accent-amber)" className="animate-glow" />
                 </motion.div>
 
                 {/* Title */}

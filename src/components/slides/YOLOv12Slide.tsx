@@ -15,15 +15,15 @@ const ConvAnimation = () => {
         <div style={{ width: '40px', height: '40px', position: 'relative', margin: '0 auto' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 11px)', gap: '2px' }}>
                 {[...Array(9)].map((_, i) => (
-                    <div key={i} style={{ width: '11px', height: '11px', background: 'rgba(6, 182, 212, 0.3)', borderRadius: '2px' }} />
+                    <div key={i} style={{ width: '11px', height: '11px', background: 'var(--border-subtle)', borderRadius: '2px' }} />
                 ))}
             </div>
             <motion.div
                 animate={{ left: x * 13, top: y * 13 }}
                 style={{
                     position: 'absolute', width: '24px', height: '24px',
-                    border: '2px solid #06b6d4', borderRadius: '3px',
-                    boxShadow: '0 0 10px rgba(6, 182, 212, 0.6)',
+                    border: '2px solid var(--accent-cyan)', borderRadius: '3px',
+                    boxShadow: '0 0 10px var(--accent-cyan)',
                 }}
             />
         </div>
@@ -46,8 +46,8 @@ const NeuralNetAnimation = () => {
                         <motion.div
                             key={node}
                             animate={{
-                                background: activeLayer === layer ? '#22c55e' : 'rgba(34, 197, 94, 0.15)',
-                                boxShadow: activeLayer === layer ? '0 0 8px #22c55e' : 'none',
+                                background: activeLayer === layer ? 'var(--accent-green)' : 'var(--border-subtle)',
+                                boxShadow: activeLayer === layer ? '0 0 8px var(--accent-green)' : 'none',
                             }}
                             style={{ width: '8px', height: '8px', borderRadius: '50%' }}
                         />
@@ -73,7 +73,7 @@ const AttentionAnimation = () => {
                 animate={{ left: focus.x, top: focus.y }}
                 style={{
                     position: 'absolute', width: '14px', height: '14px',
-                    background: 'radial-gradient(circle, #f59e0b 0%, transparent 70%)',
+                    background: 'radial-gradient(circle, var(--accent-amber) 0%, transparent 70%)',
                     borderRadius: '50%', filter: 'blur(3px)',
                 }}
             />
@@ -95,7 +95,7 @@ const UpsampleAnimation = () => {
             style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 10px)', gap: '3px', margin: '0 auto' }}
         >
             {[0, 1, 2, 3].map(i => (
-                <motion.div key={i} animate={{ background: expanded ? '#22c55e' : 'rgba(34, 197, 94, 0.25)' }}
+                <motion.div key={i} animate={{ background: expanded ? 'var(--accent-green)' : 'var(--border-subtle)' }}
                     style={{ width: '10px', height: '10px', borderRadius: '2px' }} />
             ))}
         </motion.div>
@@ -131,8 +131,8 @@ const FullNeuralNetAnimation = ({ outputLabel }: { outputLabel: string }) => {
                             <motion.div
                                 key={nodeIdx}
                                 animate={{
-                                    background: activeLayer === layerIdx ? '#a855f7' : 'rgba(168, 85, 247, 0.2)',
-                                    boxShadow: activeLayer === layerIdx ? '0 0 8px #a855f7' : 'none',
+                                    background: activeLayer === layerIdx ? 'var(--accent-cyan)' : 'var(--border-subtle)',
+                                    boxShadow: activeLayer === layerIdx ? '0 0 8px var(--accent-cyan)' : 'none',
                                     scale: activeLayer === layerIdx ? 1.2 : 1,
                                 }}
                                 style={{ width: '6px', height: '6px', borderRadius: '50%' }}
@@ -149,10 +149,10 @@ const FullNeuralNetAnimation = ({ outputLabel }: { outputLabel: string }) => {
                         key={i}
                         x1={`${15 + i * 25}%`} y1="50%"
                         x2={`${35 + i * 25}%`} y2="50%"
-                        stroke="rgba(168, 85, 247, 0.3)"
+                        stroke="var(--border-subtle)"
                         strokeWidth="1"
                         animate={{
-                            stroke: signalProgress === i ? '#a855f7' : 'rgba(168, 85, 247, 0.2)',
+                            stroke: signalProgress === i ? 'var(--accent-cyan)' : 'var(--border-subtle)',
                             strokeWidth: signalProgress === i ? 2 : 1,
                         }}
                     />
@@ -168,7 +168,7 @@ const InputAnimation = () => (
         {[...Array(25)].map((_, i) => (
             <motion.div key={i} animate={{ opacity: [0.2, 1, 0.2] }}
                 transition={{ duration: 0.6, delay: i * 0.02, repeat: Infinity }}
-                style={{ width: '6px', height: '6px', background: '#fff', borderRadius: '1px' }} />
+                style={{ width: '6px', height: '6px', background: 'var(--text-primary)', borderRadius: '1px' }} />
         ))}
     </div>
 );
@@ -182,8 +182,8 @@ const DataFlowParticle = ({ startY, delay }: { startY: number; delay: number }) 
         style={{
             position: 'absolute', left: 0, top: startY,
             width: '8px', height: '8px',
-            background: '#f59e0b', borderRadius: '50%',
-            boxShadow: '0 0 12px #f59e0b, 0 0 20px rgba(245, 158, 11, 0.5)',
+            background: 'var(--accent-amber)', borderRadius: '50%',
+            boxShadow: '0 0 12px var(--accent-amber)',
         }}
     />
 );
@@ -199,11 +199,11 @@ interface BlockProps {
 
 const ArchBlock = ({ label, sublabel, type, delay, animationType }: BlockProps) => {
     const colors: Record<string, { bg: string; border: string; text: string }> = {
-        backbone: { bg: 'rgba(6, 182, 212, 0.12)', border: 'rgba(6, 182, 212, 0.5)', text: '#06b6d4' },
-        neck: { bg: 'rgba(34, 197, 94, 0.12)', border: 'rgba(34, 197, 94, 0.5)', text: '#22c55e' },
-        head: { bg: 'rgba(168, 85, 247, 0.12)', border: 'rgba(168, 85, 247, 0.5)', text: '#a855f7' },
-        attention: { bg: 'rgba(245, 158, 11, 0.12)', border: 'rgba(245, 158, 11, 0.5)', text: '#f59e0b' },
-        input: { bg: 'rgba(255, 255, 255, 0.05)', border: 'rgba(255, 255, 255, 0.3)', text: '#fff' },
+        backbone: { bg: 'linear-gradient(180deg, var(--glass-bg), var(--bg-secondary))', border: 'var(--arch-backbone)', text: 'var(--arch-backbone)' },
+        neck: { bg: 'linear-gradient(180deg, var(--glass-bg), var(--bg-secondary))', border: 'var(--arch-neck)', text: 'var(--arch-neck)' },
+        head: { bg: 'linear-gradient(180deg, var(--glass-bg), var(--bg-secondary))', border: 'var(--arch-head)', text: 'var(--arch-head)' },
+        attention: { bg: 'linear-gradient(180deg, var(--glass-bg), var(--bg-secondary))', border: 'var(--arch-attention)', text: 'var(--arch-attention)' },
+        input: { bg: 'var(--glass-bg)', border: 'var(--border-subtle)', text: 'var(--text-primary)' },
     };
     const style = colors[type];
 
@@ -226,42 +226,52 @@ const ArchBlock = ({ label, sublabel, type, delay, animationType }: BlockProps) 
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay, duration: 0.3, type: 'spring' }}
-            whileHover={{ scale: 1.08, boxShadow: `0 0 20px ${style.border}` }}
+            whileHover={{
+                scale: 1.05,
+                boxShadow: `0 12px 30px ${style.border}33, inset 0 0 10px ${style.border}1a`
+            }}
             style={{
-                padding: '12px 14px', background: style.bg, border: `1px solid ${style.border}`,
-                borderRadius: '10px', textAlign: 'center', cursor: 'pointer', minWidth: '100px',
+                padding: '10px 14px',
+                background: style.bg,
+                border: `1.5px solid ${style.border}`,
+                borderRadius: '12px',
+                textAlign: 'center',
+                cursor: 'pointer',
+                minWidth: '140px',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.04)',
+                backdropFilter: 'blur(10px)',
+                transition: 'border 0.3s ease, box-shadow 0.3s ease'
             }}
         >
-            <div style={{ marginBottom: '8px', height: '42px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ marginBottom: '6px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {renderAnimation()}
             </div>
-            <div style={{ fontSize: '0.75rem', fontWeight: 600, color: style.text }}>{label}</div>
-            {sublabel && <div style={{ fontSize: '0.6rem', opacity: 0.5, marginTop: '2px' }}>{sublabel}</div>}
+            <div style={{ fontSize: '0.9rem', fontWeight: 800, color: style.text, letterSpacing: '0.02em', marginBottom: '2px' }}>{label}</div>
+            {sublabel && <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600 }}>{sublabel}</div>}
         </motion.div>
     );
 };
 
 const Arrow = ({ delay }: { delay: number }) => (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay }}
-        style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.9rem', textAlign: 'center', padding: '3px 0' }}>↓</motion.div>
+        style={{ color: 'var(--border-subtle)', fontSize: '1.2rem', textAlign: 'center', padding: '4px 0', opacity: 0.6 }}>↓</motion.div>
 );
 
 const YOLOv12Slide = () => {
     return (
-        <div className="slide-container" style={{ padding: '40px 60px' }}>
-            <div className="slide-content" style={{ maxWidth: '1600px' }}>
-                {/* Title on the left */}
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '50px' }}>
-                    {/* Left: Title */}
+        <div className="slide-container" style={{ padding: '0 20px', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div className="slide-content" style={{ maxWidth: '98vw', width: '100%', overflowY: 'hidden', maxHeight: '100vh', padding: '10px 0' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '30px', justifyContent: 'center' }}>
+                    {/* Left: Info Section - More compact to give diagram space */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
-                        style={{ minWidth: '220px', paddingTop: '40px' }}
+                        style={{ flex: '0 0 280px', paddingTop: '10px' }}
                     >
-                        <h2 style={{ fontSize: '2.5rem', lineHeight: 1.15 }}>
+                        <h2 style={{ fontSize: '2.2rem', marginBottom: '0.5rem', background: 'var(--gradient-solar)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                             YOLOv12<br />Architecture
                         </h2>
-                        <p style={{ fontSize: '0.9rem', opacity: 0.5, marginTop: '16px', lineHeight: 1.5 }}>
+                        <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '1.2rem', lineHeight: 1.4 }}>
                             Attention-centric design with Area Attention (A2) and R-ELAN backbone for superior detection
                         </p>
 
@@ -278,12 +288,13 @@ const YOLOv12Slide = () => {
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 1.8 + i * 0.1 }}
                                     style={{
-                                        padding: '10px 16px', background: 'rgba(245, 158, 11, 0.08)',
-                                        border: '1px solid rgba(245, 158, 11, 0.2)', borderRadius: '8px',
+                                        padding: '12px 18px', background: 'var(--glass-bg)',
+                                        border: '1px solid var(--border-subtle)', borderRadius: '12px',
+                                        boxShadow: '0 4px 15px rgba(0,0,0,0.04)',
                                     }}
                                 >
-                                    <div style={{ fontSize: '0.85rem', color: '#f59e0b', fontWeight: 600 }}>⚡ {f.name}</div>
-                                    <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', marginTop: '2px' }}>{f.desc}</div>
+                                    <div style={{ fontSize: '0.85rem', color: 'var(--accent-amber)', fontWeight: 600 }}>⚡ {f.name}</div>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '2px' }}>{f.desc}</div>
                                 </motion.div>
                             ))}
                         </div>
@@ -299,12 +310,12 @@ const YOLOv12Slide = () => {
 
                         <div style={{ display: 'flex', justifyContent: 'space-between', gap: '24px', position: 'relative', zIndex: 1 }}>
                             {/* BACKBONE */}
-                            <div style={{ flex: 1 }}>
+                            <div style={{ flex: 1, minWidth: '140px' }}>
                                 <motion.h3 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
-                                    style={{ textAlign: 'center', marginBottom: '16px', fontSize: '1rem', color: '#06b6d4' }}>
+                                    style={{ textAlign: 'center', marginBottom: '10px', fontSize: '1.0rem', color: 'var(--arch-backbone)', textTransform: 'uppercase', fontWeight: 900, letterSpacing: '0.05em' }}>
                                     Backbone
                                 </motion.h3>
-                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
                                     <ArchBlock label="Input" sublabel="640×640" type="input" delay={0.3} animationType="input" />
                                     <Arrow delay={0.35} />
                                     <ArchBlock label="Conv [64]" sublabel="P1/2" type="backbone" delay={0.4} animationType="conv" />
@@ -323,19 +334,21 @@ const YOLOv12Slide = () => {
                                 animate={{ scaleY: 1 }}
                                 transition={{ delay: 0.8, duration: 0.5 }}
                                 style={{
-                                    width: '2px',
-                                    background: 'linear-gradient(180deg, transparent, #06b6d4, #22c55e, transparent)',
+                                    width: '1.5px',
+                                    background: 'linear-gradient(180deg, transparent, var(--arch-backbone), var(--arch-neck), transparent)',
                                     alignSelf: 'stretch',
+                                    opacity: 0.5,
+                                    margin: '0 6px'
                                 }}
                             />
 
                             {/* NECK */}
-                            <div style={{ flex: 1 }}>
+                            <div style={{ flex: 1, minWidth: '140px' }}>
                                 <motion.h3 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
-                                    style={{ textAlign: 'center', marginBottom: '16px', fontSize: '1rem', color: '#22c55e' }}>
+                                    style={{ textAlign: 'center', marginBottom: '10px', fontSize: '1.0rem', color: 'var(--arch-neck)', textTransform: 'uppercase', fontWeight: 900, letterSpacing: '0.05em' }}>
                                     Neck
                                 </motion.h3>
-                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
                                     <ArchBlock label="Conv [512]" sublabel="P4/16" type="neck" delay={0.85} animationType="conv" />
                                     <Arrow delay={0.9} />
                                     <ArchBlock label="A2C2f [512]" sublabel="Area Attention ⚡" type="attention" delay={0.95} animationType="attention" />
@@ -354,19 +367,21 @@ const YOLOv12Slide = () => {
                                 animate={{ scaleY: 1 }}
                                 transition={{ delay: 1.3, duration: 0.5 }}
                                 style={{
-                                    width: '2px',
-                                    background: 'linear-gradient(180deg, transparent, #22c55e, #a855f7, transparent)',
+                                    width: '1.5px',
+                                    background: 'linear-gradient(180deg, transparent, var(--arch-neck), var(--arch-head), transparent)',
                                     alignSelf: 'stretch',
+                                    opacity: 0.5,
+                                    margin: '0 6px'
                                 }}
                             />
 
                             {/* HEAD */}
-                            <div style={{ flex: 1 }}>
+                            <div style={{ flex: 1, minWidth: '140px' }}>
                                 <motion.h3 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
-                                    style={{ textAlign: 'center', marginBottom: '16px', fontSize: '1rem', color: '#a855f7' }}>
+                                    style={{ textAlign: 'center', marginBottom: '10px', fontSize: '1.0rem', color: 'var(--arch-head)', textTransform: 'uppercase', fontWeight: 900, letterSpacing: '0.05em' }}>
                                     Head
                                 </motion.h3>
-                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', marginTop: '30px' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
                                     <ArchBlock label="Detection" sublabel="Boxes + Scores" type="head" delay={1.35} animationType="head-detect" />
                                     <Arrow delay={1.4} />
                                     <ArchBlock label="Segment" sublabel="Masks + Pixels" type="head" delay={1.45} animationType="head-segment" />
