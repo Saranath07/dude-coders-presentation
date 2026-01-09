@@ -32,7 +32,7 @@ const AnimatedBarChart = () => {
             justifyContent: 'center',
             paddingBottom: '30px'
         }}>
-            {bars.map((bar, i) => (
+            {bars.map((bar) => (
                 <div
                     key={bar.label}
                     style={{
