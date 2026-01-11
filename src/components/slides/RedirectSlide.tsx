@@ -49,16 +49,20 @@ const RedirectSlide = () => {
                     display: 'flex',
                     flexDirection: 'column'
                 }}>
-                    <iframe
-                        src="https://shriprasad15.github.io/Dude-Coders-Ideathon/"
+                    <video
+                        src={`${import.meta.env.BASE_URL}demo-video.mp4`}
+                        poster={`${import.meta.env.BASE_URL}comparison/solar1.jpg`}
+                        autoPlay
+                        loop
+                        muted
+                        controls
+                        playsInline
                         style={{
                             width: '100%',
                             height: '100%',
-                            border: 'none',
+                            objectFit: 'cover',
                             borderRadius: '12px'
                         }}
-                        title="Project Landing Page"
-                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                     />
                 </div>
             </motion.div>

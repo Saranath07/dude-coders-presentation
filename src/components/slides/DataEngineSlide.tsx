@@ -336,7 +336,13 @@ const DataEngineSlide = () => {
                     >
                         <PulsingIcon Icon={Database} delay={0.4} />
                         <h3 style={{ marginTop: '16px', marginBottom: '8px', fontSize: '1.6rem' }}>Hard Negative Mining</h3>
-                        <p style={{ fontSize: '1.7rem', opacity: 0.8, lineHeight: 1.5 }}>More non-panel images = Fewer false positives</p>
+                        <p style={{ fontSize: '1.5rem', opacity: 0.8, lineHeight: 1.5, marginBottom: '8px' }}>
+                            <strong style={{ color: 'var(--accent-amber)' }}>Adaptive Perception:</strong> "Geometry First" approach
+                        </p>
+                        <ul style={{ fontSize: '1.2rem', color: 'var(--text-muted)', textAlign: 'left', paddingLeft: '20px', marginBottom: '10px' }}>
+                            <li>Spectrally Adaptive (Haze Penetration)</li>
+                            <li>Trains on Pools/Wet Roofs to reduce False Positives</li>
+                        </ul>
                         <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
                             <HardNegativeAnimation />
                         </div>

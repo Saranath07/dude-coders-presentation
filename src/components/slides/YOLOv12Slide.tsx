@@ -275,12 +275,27 @@ const YOLOv12Slide = () => {
                             Attention-centric design with Area Attention (A2) and R-ELAN backbone for superior detection
                         </p>
 
+                        {/* Edge Deploy Stats */}
+                        <div style={{ marginBottom: '20px', padding: '12px', background: 'rgba(34, 197, 94, 0.1)', borderRadius: '8px', border: '1px solid rgba(34, 197, 94, 0.3)' }}>
+                            <div style={{ fontSize: '0.8rem', color: 'var(--accent-green)', fontWeight: 700, marginBottom: '6px', textTransform: 'uppercase' }}>Edge Deployment Architecture</div>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                                <div>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Format</div>
+                                    <div style={{ fontSize: '0.85rem', fontWeight: 600 }}>TensorRT / OpenVINO</div>
+                                </div>
+                                <div>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Power Draw</div>
+                                    <div style={{ fontSize: '0.85rem', fontWeight: 600 }}>&lt;5 Watts (&lt;1% Battery)</div>
+                                </div>
+                            </div>
+                        </div>
+
                         {/* Key features */}
                         <div style={{ marginTop: '28px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                             {[
-                                { name: 'Area Attention', desc: 'Large receptive field' },
-                                { name: 'R-ELAN', desc: 'Stable aggregation' },
-                                { name: 'Flash Attention', desc: 'Memory optimized' },
+                                { name: 'A2C2F', desc: 'Area Attention (A2) + C2f Fusion' },
+                                { name: 'R-ELAN', desc: 'Residual Efficient Aggregation' },
+                                { name: 'Edge Efficient', desc: '180 FPS on Jetson Orin' },
                             ].map((f, i) => (
                                 <motion.div
                                     key={f.name}
@@ -355,7 +370,7 @@ const YOLOv12Slide = () => {
                                     <Arrow delay={1.0} />
                                     <ArchBlock label="R-ELAN [512]" type="neck" delay={1.05} animationType="neural" />
                                     <Arrow delay={1.1} />
-                                    <ArchBlock label="A2C2f [1024]" sublabel="Area Attention ⚡" type="attention" delay={1.15} animationType="attention" />
+                                    <ArchBlock label="A2C2f [1024]" sublabel="Feature Fusion ⚡" type="attention" delay={1.15} animationType="attention" />
                                     <Arrow delay={1.2} />
                                     <ArchBlock label="Upsample" sublabel="+ Concat" type="neck" delay={1.25} animationType="upsample" />
                                 </div>

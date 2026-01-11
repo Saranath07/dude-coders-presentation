@@ -7,6 +7,7 @@ import MetricsSlide from './components/slides/MetricsSlide';
 import DataEngineSlide from './components/slides/DataEngineSlide';
 import YOLOv12Slide from './components/slides/YOLOv12Slide';
 import InferenceCascadeSlide from './components/slides/InferenceCascadeSlide';
+import TechSpecsSlide from './components/slides/TechSpecsSlide';
 import ResultsSlide from './components/slides/ResultsSlide';
 import BenchmarksSlide from './components/slides/BenchmarksSlide';
 import ConclusionSlide from './components/slides/ConclusionSlide';
@@ -22,10 +23,11 @@ const slides = [
   DataEngineSlide,
   YOLOv12Slide,
   InferenceCascadeSlide,
+  TechSpecsSlide,
   ResultsSlide,
   BenchmarksSlide,
-  ConclusionSlide,
   RedirectSlide,
+  ConclusionSlide,
 ];
 
 const slideVariants = {
@@ -66,6 +68,35 @@ function App() {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
+
+  // Preload Images
+  useEffect(() => {
+    const imagesToPreload = [
+      'global-learning.png',
+      'India-AI-Impact-Summit-2026.png',
+      'iitm_logo.png',
+      'comparison/model1-1.png',
+      'comparison/model1-833.png',
+      'comparison/model2-1.png',
+      'comparison/model2-833.png',
+      'comparison/model3-1.png',
+      'comparison/model3-833.png',
+      'comparison/solar1.jpg',
+      'comparison/solar2545.jpg',
+      'comparison/solar833.jpg'
+    ];
+
+    imagesToPreload.forEach(image => {
+      const img = new Image();
+      img.src = `${import.meta.env.BASE_URL}${image}`;
+    });
+
+    // Preload Video
+    const videoUrl = `${import.meta.env.BASE_URL}demo-video.mp4`;
+    fetch(videoUrl).then(response => {
+      if (!response.ok) console.warn('Failed to preload video');
+    }).catch(err => console.error('Video preload error:', err));
+  }, []);
 
   const paginate = useCallback((newDirection: number) => {
     const nextSlide = currentSlide + newDirection;
@@ -175,7 +206,7 @@ function App() {
       {/* Dynamic Progress Bar at bottom */}
       <div style={{
         position: 'fixed',
-        bottom: '24px',
+        bottom: '30px',
         left: '50%',
         transform: 'translateX(-50%)',
         display: 'flex',
@@ -205,6 +236,7 @@ function App() {
           />
         ))}
       </div>
+
     </div>
   );
 }

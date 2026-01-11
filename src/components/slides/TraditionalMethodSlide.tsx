@@ -13,7 +13,7 @@ const HoughTransformDemo = () => {
     }, []);
 
     return (
-        <div style={{ position: 'relative', width: '300px', height: '200px', margin: '0 auto' }}>
+        <div style={{ position: 'relative', width: '450px', height: '300px', margin: '0 auto' }}>
             {/* Background "satellite image" */}
             <div
                 style={{
@@ -129,9 +129,9 @@ const HoughTransformDemo = () => {
                                 left: '22%',
                                 background: 'var(--accent-green)',
                                 color: 'white',
-                                padding: '2px 6px',
+                                padding: '4px 8px',
                                 borderRadius: '4px',
-                                fontSize: '10px',
+                                fontSize: '14px',
                             }}
                         >
                             Panel ✓
@@ -146,9 +146,9 @@ const HoughTransformDemo = () => {
                                 left: '58%',
                                 background: 'var(--accent-red)',
                                 color: 'white',
-                                padding: '2px 6px',
+                                padding: '4px 8px',
                                 borderRadius: '4px',
-                                fontSize: '10px',
+                                fontSize: '14px',
                             }}
                         >
                             Pool ✗
@@ -179,9 +179,9 @@ const TraditionalMethodSlide = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.2, duration: 0.5 }}
                     >
-                        <div className="glass-card-static callout" style={{ marginBottom: '1.5rem' }}>
-                            <h3 style={{ marginBottom: '12px' }}>The Hypothesis</h3>
-                            <p style={{ fontStyle: 'italic' }}>
+                        <div className="glass-card-static callout" style={{ marginBottom: '1.8rem' }}>
+                            <h2 style={{ marginBottom: '12px' }}>The Hypothesis</h2>
+                            <p style={{ fontStyle: 'italic', fontSize: '1.5em', lineHeight: '1.6' }}>
                                 "Panels are blue rectangles with distinct edges—let's use{' '}
                                 <strong style={{ color: 'var(--accent-green)' }}>Hough Transform</strong> +{' '}
                                 <strong style={{ color: 'var(--accent-green)' }}>Color Thresholding</strong>!"
@@ -193,28 +193,31 @@ const TraditionalMethodSlide = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5, duration: 0.5 }}
                         >
-                            <h3 style={{ marginBottom: '16px', color: 'var(--accent-amber)' }}>Why It Failed</h3>
+                            <h2 style={{ marginBottom: '26px', color: 'var(--accent-amber)', fontSize: '2rem' }}>Why It Failed</h2>
                             <ul className="feature-list">
                                 <motion.li
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.6 }}
+                                    style={{ marginBottom: '24px' }}
                                 >
-                                    <span><strong style={{ color: 'var(--accent-red)' }}>False Positives:</strong> Swimming pools, tarps, skylights</span>
+                                    <span style={{ fontSize: '1.5rem', lineHeight: '1.4' }}><strong style={{ color: 'var(--accent-red)', fontSize: '1.6rem' }}>False Positives:</strong> Swimming pools, tarps, skylights</span>
                                 </motion.li>
                                 <motion.li
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.7 }}
+                                    style={{ marginBottom: '24px' }}
                                 >
-                                    <span><strong style={{ color: '#f44336' }}>False Negatives:</strong> 70% of shadowed panels missed</span>
+                                    <span style={{ fontSize: '1.5rem', lineHeight: '1.4' }}><strong style={{ color: '#f44336', fontSize: '1.6rem' }}>False Negatives:</strong> 70% of shadowed panels missed</span>
                                 </motion.li>
                                 <motion.li
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.8 }}
+                                    style={{ marginBottom: '24px' }}
                                 >
-                                    <span><strong style={{ color: '#f44336' }}>Rigidity:</strong> Parameters couldn't adapt across cities</span>
+                                    <span style={{ fontSize: '1.5rem', lineHeight: '1.4' }}><strong style={{ color: '#f44336', fontSize: '1.6rem' }}>Rigidity:</strong> Parameters couldn't adapt across cities</span>
                                 </motion.li>
                             </ul>
                         </motion.div>
@@ -228,9 +231,9 @@ const TraditionalMethodSlide = () => {
                         className="glass-card"
                         style={{ padding: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
                     >
-                        <h3 style={{ marginBottom: '24px', textAlign: 'center' }}>Edge Detection Demo</h3>
+                        <h2 style={{ marginBottom: '64px', textAlign: 'center' }}>Edge Detection Demo</h2>
                         <HoughTransformDemo />
-                        <p style={{ marginTop: '16px', fontSize: '0.9rem', opacity: 0.7, textAlign: 'center' }}>
+                        <p style={{ marginTop: '26px', fontSize: '1.5rem', opacity: 0.7, textAlign: 'center' }}>
                             Hough lines detect edges... but can't distinguish purpose
                         </p>
                     </motion.div>

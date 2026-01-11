@@ -140,8 +140,8 @@ const ResultsSlide = () => {
                             </thead>
                             <tbody>
                                 {[
-                                    { model: 'UNet Baseline', score: 0.75 },
-                                    { model: 'YOLOv8-seg', score: 0.8 },
+                                    { model: 'Faster R-CNN', score: 0.68 },
+                                    { model: 'YOLOv8-seg', score: 0.82 },
                                     { model: 'Our YOLOv12 + Cascade', score: 0.95, highlight: true },
                                 ].map((row, i) => (
                                     <motion.tr

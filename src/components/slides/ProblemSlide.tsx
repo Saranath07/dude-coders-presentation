@@ -158,15 +158,15 @@ const ProblemSlide = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2, duration: 0.5 }}
                     className="callout glass-card-static"
-                    style={{ marginBottom: '2rem' }}
+                    style={{ marginBottom: '2.5rem', padding: '30px' }}
                 >
-                    <p style={{ fontSize: '1.3rem' }}>
-                        <strong style={{ color: '#f59e0b' }}>Mission:</strong>{' '}
+                    <p style={{ fontSize: '1.8rem', lineHeight: 1.4 }}>
+                        <strong style={{ color: '#f59e0b', fontSize: '2rem' }}>Mission:</strong>{' '}
                         Accurately detect solar panels in satellite imagery for automated residential and commercial energy audits.
                     </p>
                 </motion.div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', marginTop: '2rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '30px', marginTop: '2.5rem' }}>
                     {challenges.map((challenge, index) => (
                         <motion.div
                             key={challenge.title}
@@ -174,24 +174,24 @@ const ProblemSlide = () => {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             transition={{ delay: 0.4 + index * 0.15, duration: 0.5 }}
                             className="glass-card"
-                            style={{ padding: '28px', textAlign: 'center' }}
-                            whileHover={{ scale: 1.03, borderColor: challenge.color }}
+                            style={{ padding: '40px 30px', textAlign: 'center' }}
+                            whileHover={{ scale: 1.05, borderColor: challenge.color }}
                         >
                             {/* Animation */}
                             <motion.div
                                 initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
+                                animate={{ scale: 1.5 }}
                                 transition={{ delay: 0.6 + index * 0.15, type: 'spring' }}
                                 style={{
                                     display: 'flex', justifyContent: 'center',
-                                    marginBottom: '16px', height: '50px', alignItems: 'center'
+                                    marginBottom: '24px', height: '60px', alignItems: 'center'
                                 }}
                             >
                                 <challenge.Animation />
                             </motion.div>
 
-                            <h3 style={{ marginBottom: '8px', color: challenge.color }}>{challenge.title}</h3>
-                            <p style={{ fontSize: '1rem', opacity: 0.7 }}>{challenge.desc}</p>
+                            <h3 style={{ marginBottom: '12px', color: challenge.color, fontSize: '2.5rem' }}>{challenge.title}</h3>
+                            <p style={{ fontSize: '2rem', opacity: 0.8, lineHeight: 1.5 }}>{challenge.desc}</p>
                         </motion.div>
                     ))}
                 </div>
