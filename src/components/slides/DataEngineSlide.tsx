@@ -357,7 +357,7 @@ const DataEngineSlide = () => {
                         style={{ padding: '32px', display: 'flex', flexDirection: 'column' }}
                     >
                         <PulsingIcon Icon={Sparkles} delay={0.55} />
-                        <h3 style={{ marginTop: '16px', marginBottom: '8px', fontSize: '1.6rem' }}>SAM Integration</h3>
+                        <h3 style={{ marginTop: '16px', marginBottom: '8px', fontSize: '1.6rem' }}>Segment Anything Model (SAM) Integration</h3>
                         <p style={{ fontSize: '1.7rem', opacity: 0.8, lineHeight: 1.5 }}>Precise boundary annotation with AI assistance</p>
                         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             <SAMAnimation />

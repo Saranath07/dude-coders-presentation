@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Zap, Eye, Battery, ArrowRight, TrendingUp, Grid, ShieldCheck } from 'lucide-react';
+import { Zap, Battery, ArrowRight, TrendingUp, Grid, ShieldCheck } from 'lucide-react';
 
 const ConclusionSlide = () => {
     const recommendations = [
@@ -9,12 +9,7 @@ const ConclusionSlide = () => {
             desc: 'Combine Vision (Capacity) with Meter Data (Output) to detect system inefficiencies and degradation.',
             color: 'var(--accent-amber)'
         },
-        {
-            icon: Eye,
-            title: 'Adaptive Perception',
-            desc: 'Use "Geometry First" detection to maintain accuracy in smog, rain, and low-contrast conditions.',
-            color: 'var(--accent-cyan)'
-        },
+        
         {
             icon: Battery,
             title: 'Edge Efficiency',
