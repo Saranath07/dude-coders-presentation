@@ -1,242 +1,228 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useCallback } from 'react';
-import TitleSlide from './components/slides/TitleSlide';
-import ProblemSlide from './components/slides/ProblemSlide';
-import TraditionalMethodSlide from './components/slides/TraditionalMethodSlide';
-import MetricsSlide from './components/slides/MetricsSlide';
-import DataEngineSlide from './components/slides/DataEngineSlide';
-import YOLOv12Slide from './components/slides/YOLOv12Slide';
-import InferenceCascadeSlide from './components/slides/InferenceCascadeSlide';
-import TechSpecsSlide from './components/slides/TechSpecsSlide';
-import ResultsSlide from './components/slides/ResultsSlide';
-import BenchmarksSlide from './components/slides/BenchmarksSlide';
-import ConclusionSlide from './components/slides/ConclusionSlide';
-import RedirectSlide from './components/slides/RedirectSlide';
-import ThemeToggle from './components/ThemeToggle';
-import './styles/glassmorphism.css';
+
+import TitleSlide      from './components/slides2/TitleSlide';
+import SolarBoomSlide  from './components/slides2/SolarBoomSlide';
+import HiddenCrisisSlide from './components/slides2/HiddenCrisisSlide';
+import SolutionSlide   from './components/slides2/SolutionSlide';
+import YOLOSlide       from './components/slides2/YOLOSlide';
+import DataEngineSlide from './components/slides2/DataEngineSlide';
+import CascadeSlide    from './components/slides2/CascadeSlide';
+import OutputSlide     from './components/slides2/OutputSlide';
+import PerformanceSlide from './components/slides2/PerformanceSlide';
+import EconomicsSlide  from './components/slides2/EconomicsSlide';
+import FutureSlide     from './components/slides2/FutureSlide';
+import MultiModalSlide from './components/slides2/MultiModalSlide';
+import RoadmapSlide    from './components/slides2/RoadmapSlide';
+import DemoSlide       from './components/slides2/DemoSlide';
+import ConclusionSlide from './components/slides2/ConclusionSlide';
+
+import './styles/heliograph.css';
 
 const slides = [
-  TitleSlide,
-  ProblemSlide,
-  TraditionalMethodSlide,
-  MetricsSlide,
-  DataEngineSlide,
-  YOLOv12Slide,
-  InferenceCascadeSlide,
-  TechSpecsSlide,
-  ResultsSlide,
-  BenchmarksSlide,
-  RedirectSlide,
-  ConclusionSlide,
+  { component: TitleSlide,       label: 'Title' },
+  { component: SolarBoomSlide,   label: 'Solar Boom' },
+  { component: HiddenCrisisSlide,label: 'Hidden Crisis' },
+  { component: SolutionSlide,    label: 'Solution' },
+  { component: YOLOSlide,        label: 'YOLOv12' },
+  { component: DataEngineSlide,  label: 'Data Engine' },
+  { component: CascadeSlide,     label: 'Cascade' },
+  { component: OutputSlide,      label: 'Output' },
+  { component: PerformanceSlide, label: 'Performance' },
+  { component: EconomicsSlide,   label: 'Economics' },
+  { component: FutureSlide,      label: 'Future' },
+  { component: MultiModalSlide,  label: 'Multi-Modal' },
+  { component: RoadmapSlide,     label: 'Roadmap' },
+  { component: DemoSlide,        label: 'Demo' },
+  { component: ConclusionSlide,  label: 'Conclusion' },
 ];
 
+const EASE_OUT  = [0.16, 1, 0.3, 1] as const;
+const EASE_IN   = [0.4, 0, 1, 1] as const;
+
 const slideVariants = {
-  enter: (direction: number) => ({
-    x: direction > 0 ? 1000 : -1000,
+  enter: (dir: number) => ({
+    x: dir > 0 ? '100%' : '-100%',
     opacity: 0,
-    scale: 0.95,
   }),
   center: {
     x: 0,
     opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.6,
-      ease: [0.4, 0, 0.2, 1] as const,
-    },
+    transition: { duration: 0.55, ease: EASE_OUT },
   },
-  exit: (direction: number) => ({
-    x: direction < 0 ? 1000 : -1000,
+  exit: (dir: number) => ({
+    x: dir < 0 ? '100%' : '-100%',
     opacity: 0,
-    scale: 0.95,
-    transition: {
-      duration: 0.5,
-      ease: [0.4, 0, 0.2, 1] as const,
-    },
+    transition: { duration: 0.4, ease: EASE_IN },
   }),
 };
 
 function App() {
-  const [[currentSlide, direction], setSlide] = useState([0, 0]);
+  const [[current, direction], setSlide] = useState([0, 0]);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
 
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
-  };
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  // Preload Images
-  useEffect(() => {
-    const imagesToPreload = [
-      'global-learning.png',
-      'India-AI-Impact-Summit-2026.png',
-      'iitm_logo.png',
-      'comparison/model1-1.png',
-      'comparison/model1-833.png',
-      'comparison/model2-1.png',
-      'comparison/model2-833.png',
-      'comparison/model3-1.png',
-      'comparison/model3-833.png',
-      'comparison/solar1.jpg',
-      'comparison/solar2545.jpg',
-      'comparison/solar833.jpg'
-    ];
-
-    imagesToPreload.forEach(image => {
-      const img = new Image();
-      img.src = `${import.meta.env.BASE_URL}${image}`;
+  const paginate = useCallback((newDir: number) => {
+    setSlide(([cur]) => {
+      const next = cur + newDir;
+      if (next < 0 || next >= slides.length) return [cur, newDir];
+      return [next, newDir];
     });
-
-    // Preload Video
-    const videoUrl = `${import.meta.env.BASE_URL}demo-video.mp4`;
-    fetch(videoUrl).then(response => {
-      if (!response.ok) console.warn('Failed to preload video');
-    }).catch(err => console.error('Video preload error:', err));
   }, []);
 
-  const paginate = useCallback((newDirection: number) => {
-    const nextSlide = currentSlide + newDirection;
-    if (nextSlide >= 0 && nextSlide < slides.length) {
-      setSlide([nextSlide, newDirection]);
-    }
-  }, [currentSlide]);
+  const goTo = useCallback((idx: number) => {
+    setSlide(([cur]) => [idx, idx > cur ? 1 : -1]);
+  }, []);
 
-  // Toggle fullscreen
   const toggleFullscreen = useCallback(() => {
     if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().then(() => {
-        setIsFullscreen(true);
-      }).catch(console.error);
+      document.documentElement.requestFullscreen().catch(console.error);
     } else {
-      document.exitFullscreen().then(() => {
-        setIsFullscreen(false);
-      }).catch(console.error);
+      document.exitFullscreen().catch(console.error);
     }
   }, []);
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') {
-        e.preventDefault();
-        paginate(1);
-      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-        e.preventDefault();
-        paginate(-1);
-      } else if (e.key === 'f' || e.key === 'F') {
-        e.preventDefault();
-        toggleFullscreen();
-      } else if (e.key === 'Escape' && isFullscreen) {
-        setIsFullscreen(false);
-      }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') { e.preventDefault(); paginate(1); }
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); paginate(-1); }
+      else if (e.key === 'f' || e.key === 'F') { e.preventDefault(); toggleFullscreen(); }
     };
+    const onFsChange = () => setIsFullscreen(!!document.fullscreenElement);
+    window.addEventListener('keydown', onKey);
+    document.addEventListener('fullscreenchange', onFsChange);
+    return () => { window.removeEventListener('keydown', onKey); document.removeEventListener('fullscreenchange', onFsChange); };
+  }, [paginate, toggleFullscreen]);
 
-    const handleFullscreenChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
-    };
+  // Preload assets
+  useEffect(() => {
+    const imgs = ['global-learning.png', 'India-AI-Impact-Summit-2026.png', 'iitm_logo.png',
+      'comparison/solar1.jpg', 'comparison/solar2545.jpg', 'comparison/solar833.jpg'];
+    imgs.forEach(src => { const i = new Image(); i.src = `${import.meta.env.BASE_URL}${src}`; });
+  }, []);
 
-    window.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('fullscreenchange', handleFullscreenChange);
-    };
-  }, [paginate, toggleFullscreen, isFullscreen]);
-
-  const CurrentSlide = slides[currentSlide];
+  const CurrentSlide = slides[current].component;
 
   return (
-    <div style={{ width: '100%', height: '100vh', overflow: 'hidden', position: 'relative' }}>
-      {/* Background glows */}
-      <div className="bg-glow gold" />
-      <div className="bg-glow blue" />
-
-      {/* Slides */}
+    <div style={{ width: '100%', height: '100vh', overflow: 'hidden', position: 'relative', background: 'var(--bg-base)' }}>
       <AnimatePresence mode="wait" custom={direction}>
         <motion.div
-          key={currentSlide}
+          key={current}
           custom={direction}
           variants={slideVariants}
           initial="enter"
           animate="center"
           exit="exit"
-          style={{ width: '100%', height: '100%', position: 'absolute' }}
+          style={{ position: 'absolute', inset: 0 }}
         >
           <CurrentSlide />
         </motion.div>
       </AnimatePresence>
 
-      {/* Theme Toggle */}
-      <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+      {/* Slide counter top-left */}
+      <div style={{
+        position: 'fixed', top: 16, left: 20, zIndex: 1000,
+        fontFamily: 'var(--font-mono)', fontSize: '0.62rem',
+        color: 'var(--text-muted)', letterSpacing: '0.1em',
+        userSelect: 'none',
+      }}>
+        {String(current + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
+        <span style={{ marginLeft: 10, color: 'var(--amber)', opacity: 0.7 }}>{slides[current].label}</span>
+      </div>
 
-      {/* Fullscreen button */}
+      {/* Fullscreen button top-right */}
       <motion.button
         onClick={toggleFullscreen}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
+        whileHover={{ opacity: 1 }}
         style={{
-          position: 'fixed',
-          top: '16px',
-          right: '16px',
-          zIndex: 1000,
-          background: 'var(--glass-bg)',
-          border: '1px solid var(--border-subtle)',
-          borderRadius: '12px',
-          padding: '8px 16px',
-          color: 'var(--text-secondary)',
-          fontSize: '0.75rem',
-          fontWeight: 600,
+          position: 'fixed', top: 14, right: 16, zIndex: 1000,
+          background: 'rgba(7,7,14,0.8)',
+          border: '1px solid var(--border)',
+          borderRadius: 8,
+          padding: '6px 14px',
+          color: 'var(--text-muted)',
+          fontFamily: 'var(--font-mono)',
+          fontSize: '0.62rem',
           cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          transition: 'all 0.2s',
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          letterSpacing: '0.08em',
+          outline: 'none',
         }}
-        whileHover={{ background: 'var(--border-accent)', color: 'var(--text-primary)' }}
       >
         {isFullscreen ? '⛶ Exit (F)' : '⛶ Fullscreen (F)'}
       </motion.button>
 
-      {/* Dynamic Progress Bar at bottom */}
+      {/* Navigation dots bottom-center */}
       <div style={{
-        position: 'fixed',
-        bottom: '30px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        display: 'flex',
-        gap: '8px',
-        padding: '8px 14px',
-        background: 'var(--glass-bg)',
-        border: '1px solid var(--border-subtle)',
-        borderRadius: '20px',
+        position: 'fixed', bottom: 22, left: '50%', transform: 'translateX(-50%)',
+        display: 'flex', gap: 5, alignItems: 'center',
+        padding: '7px 12px',
+        background: 'rgba(7,7,14,0.85)',
+        border: '1px solid var(--border)',
+        borderRadius: 20,
         zIndex: 1000,
-        boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
       }}>
         {slides.map((_, i) => (
           <motion.div
             key={i}
-            onClick={() => setSlide([i, i > currentSlide ? 1 : -1])}
-            whileHover={{ scale: 1.2 }}
+            onClick={() => goTo(i)}
+            whileHover={{ scale: 1.4 }}
             style={{
-              width: i === currentSlide ? '24px' : '8px',
-              height: '8px',
-              borderRadius: '4px',
-              background: i === currentSlide ? 'var(--accent-green)' : 'var(--border-subtle)',
+              width: i === current ? 20 : 6,
+              height: 6,
+              borderRadius: 3,
+              background: i === current ? 'var(--amber)' : 'var(--border-bright)',
               cursor: 'pointer',
-              transition: 'all 0.5s cubic-bezier(0.19, 1, 0.22, 1)',
+              transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+              boxShadow: i === current ? '0 0 8px var(--amber)' : 'none',
             }}
           />
         ))}
       </div>
 
+      {/* Arrow buttons */}
+      {current > 0 && (
+        <motion.button
+          onClick={() => paginate(-1)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.4 }}
+          whileHover={{ opacity: 1 }}
+          style={{
+            position: 'fixed', left: 16, top: '50%', transform: 'translateY(-50%)',
+            background: 'rgba(7,7,14,0.8)', border: '1px solid var(--border)',
+            color: 'var(--text-secondary)', width: 36, height: 36,
+            borderRadius: '50%', cursor: 'pointer', zIndex: 1000,
+            fontFamily: 'var(--font-mono)', fontSize: '1rem',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            backdropFilter: 'blur(8px)', outline: 'none',
+          }}
+        >
+          ←
+        </motion.button>
+      )}
+      {current < slides.length - 1 && (
+        <motion.button
+          onClick={() => paginate(1)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.4 }}
+          whileHover={{ opacity: 1 }}
+          style={{
+            position: 'fixed', right: 16, top: '50%', transform: 'translateY(-50%)',
+            background: 'rgba(7,7,14,0.8)', border: '1px solid var(--border)',
+            color: 'var(--text-secondary)', width: 36, height: 36,
+            borderRadius: '50%', cursor: 'pointer', zIndex: 1000,
+            fontFamily: 'var(--font-mono)', fontSize: '1rem',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            backdropFilter: 'blur(8px)', outline: 'none',
+          }}
+        >
+          →
+        </motion.button>
+      )}
     </div>
   );
 }
