@@ -72,7 +72,7 @@ const RoadmapSlide = () => (
       <motion.div initial={{ opacity: 0, y: -14 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 26 }}>
         <div className="label-mono" style={{ marginBottom: 8 }}>Part VII — The Larger Vision</div>
         <div className="glow-rule" style={{ marginBottom: 12 }} />
-        <h2 className="h-section" style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.4rem)', lineHeight: 1.1 }}>
+        <h2 className="h-section" style={{ fontSize: 'clamp(2.2rem, 3.2vw, 3.2rem)', lineHeight: 1.1 }}>
           From Dots on a Map to{' '}
           <span style={{ fontStyle: 'italic', color: 'var(--amber)' }}>Energy Security</span>
         </h2>
@@ -103,7 +103,7 @@ const RoadmapSlide = () => (
                 }}>
                   {ph.status === 'achieved'
                     ? <span style={{ fontSize: '1rem' }}>✓</span>
-                    : <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: ph.color }}>{i + 1}</span>
+                    : <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9rem', color: ph.color }}>{i + 1}</span>
                   }
                 </div>
 
@@ -117,23 +117,23 @@ const RoadmapSlide = () => (
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                     <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: ph.color }}>{ph.phase}</span>
-                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)' }}>{ph.label}</span>
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.92rem', color: ph.color }}>{ph.phase}</span>
+                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)' }}>{ph.label}</span>
                     </div>
                     <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
                       <span className="badge" style={{
                         background: ph.color + '18', border: `1px solid ${ph.color}44`,
-                        color: ph.color, fontSize: '0.58rem',
+                        color: ph.color, fontSize: '0.88rem',
                       }}>
                         {ph.metric}
                       </span>
-                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.56rem', color: 'var(--text-muted)' }}>{ph.timeline}</span>
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.86rem', color: 'var(--text-muted)' }}>{ph.timeline}</span>
                     </div>
                   </div>
                   <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 4 }}>
                     {ph.bullets.map(b => (
                       <li key={b} style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
-                        <span style={{ color: ph.color, fontSize: '0.6rem', marginTop: 3, flexShrink: 0 }}>→</span>
+                        <span style={{ color: ph.color, fontSize: '0.9rem', marginTop: 3, flexShrink: 0 }}>→</span>
                         <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.76rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>{b}</span>
                       </li>
                     ))}
@@ -146,7 +146,7 @@ const RoadmapSlide = () => (
 
         {/* Right: VPP stats */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-          <div className="label-mono" style={{ marginBottom: 4, fontSize: '0.56rem' }}>Virtual Power Plant Market</div>
+          <div className="label-mono" style={{ marginBottom: 4, fontSize: '0.86rem' }}>Virtual Power Plant Market</div>
 
           {vppStats.map((s, i) => (
             <motion.div
@@ -157,8 +157,8 @@ const RoadmapSlide = () => (
               transition={{ delay: 0.4 + i * 0.1 }}
               style={{ padding: '14px 16px' }}
             >
-              <div className="stat-num" style={{ fontSize: '1.4rem', color: i < 2 ? 'var(--amber)' : i === 2 ? 'var(--teal)' : 'var(--green)' }}>{s.v}</div>
-              <div className="stat-label" style={{ fontSize: '0.56rem', marginTop: 4 }}>{s.l}</div>
+              <div className="stat-num" style={{ fontSize: '2.2rem', color: i < 2 ? 'var(--amber)' : i === 2 ? 'var(--teal)' : 'var(--green)' }}>{s.v}</div>
+              <div className="stat-label" style={{ fontSize: '0.86rem', marginTop: 4 }}>{s.l}</div>
             </motion.div>
           ))}
 
@@ -168,7 +168,7 @@ const RoadmapSlide = () => (
             transition={{ delay: 1 }}
             style={{ padding: '14px 16px', background: 'var(--amber-dim)', border: '1px solid var(--amber-border)', borderRadius: 10 }}
           >
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--amber-bright)', lineHeight: 1.7 }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.98rem', color: 'var(--amber-bright)', lineHeight: 1.7 }}>
               "You cannot orchestrate what you haven't mapped."
             </div>
           </motion.div>

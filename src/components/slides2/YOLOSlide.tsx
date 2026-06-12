@@ -88,11 +88,11 @@ const YOLOSlide = () => {
           <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 24 }}>
             <div className="label-mono" style={{ marginBottom: 8 }}>YOLOv12 Architecture</div>
             <div className="glow-rule" style={{ marginBottom: 14 }} />
-            <h2 className="h-section" style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.4rem)' }}>
+            <h2 className="h-section" style={{ fontSize: 'clamp(2.2rem, 3.2vw, 3.2rem)' }}>
               Pillar 1: The Right Architecture{' '}
               <span style={{ fontStyle: 'italic', color: 'var(--amber)' }}>for This Problem</span>
             </h2>
-            <p className="body" style={{ fontSize: '0.85rem', marginTop: 8 }}>
+            <p className="body" style={{ fontSize: '1.15rem', marginTop: 8 }}>
               Tap any block to learn why we chose it.
             </p>
           </motion.div>
@@ -178,25 +178,25 @@ const YOLOSlide = () => {
               className="card"
               style={{ padding: '24px', borderColor: 'var(--amber-border)' }}
             >
-              <div className="label-mono" style={{ marginBottom: 10, fontSize: '0.6rem' }}>
+              <div className="label-mono" style={{ marginBottom: 10, fontSize: '0.9rem' }}>
                 {activeBlock}
               </div>
               <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.1rem', color: 'var(--text-primary)', marginBottom: 12, lineHeight: 1.2 }}>
                 {info.title}
               </h3>
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.75 }}>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.15rem', color: 'var(--text-secondary)', lineHeight: 1.75 }}>
                 {info.body}
               </p>
             </motion.div>
           ) : (
             <div className="card" style={{ padding: '24px', textAlign: 'center' }}>
-              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-muted)' }}>← Tap a block</p>
+              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '1.0rem', color: 'var(--text-muted)' }}>← Tap a block</p>
             </div>
           )}
 
           {/* Key metrics */}
           <div className="card" style={{ padding: '18px 20px' }}>
-            <div className="label-mono" style={{ marginBottom: 14, fontSize: '0.58rem' }}>Why YOLOv12 over alternatives</div>
+            <div className="label-mono" style={{ marginBottom: 14, fontSize: '0.88rem' }}>Why YOLOv12 over alternatives</div>
             {[
               { label: 'Traditional (Hough)', f1: 54, color: '#EF4444' },
               { label: 'Faster R-CNN', f1: 68, color: '#F59E0B' },
@@ -206,8 +206,8 @@ const YOLOSlide = () => {
             ].map(r => (
               <div key={r.label} style={{ marginBottom: 10 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--text-secondary)' }}>{r.label}</span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: r.color, fontWeight: 700 }}>{r.f1}%</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.92rem', color: 'var(--text-secondary)' }}>{r.label}</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.92rem', color: r.color, fontWeight: 700 }}>{r.f1}%</span>
                 </div>
                 <div style={{ height: 3, background: 'var(--border)', borderRadius: 2 }}>
                   <motion.div

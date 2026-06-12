@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
+import StarField from './components/StarField';
 import TitleSlide      from './components/slides2/TitleSlide';
 import SolarBoomSlide  from './components/slides2/SolarBoomSlide';
 import HiddenCrisisSlide from './components/slides2/HiddenCrisisSlide';
@@ -10,6 +11,7 @@ import DataEngineSlide from './components/slides2/DataEngineSlide';
 import CascadeSlide    from './components/slides2/CascadeSlide';
 import OutputSlide     from './components/slides2/OutputSlide';
 import PerformanceSlide from './components/slides2/PerformanceSlide';
+import BenchmarksSlide from './components/slides2/BenchmarksSlide';
 import EconomicsSlide  from './components/slides2/EconomicsSlide';
 import FutureSlide     from './components/slides2/FutureSlide';
 import MultiModalSlide from './components/slides2/MultiModalSlide';
@@ -29,6 +31,7 @@ const slides = [
   { component: CascadeSlide,     label: 'Cascade' },
   { component: OutputSlide,      label: 'Output' },
   { component: PerformanceSlide, label: 'Performance' },
+  { component: BenchmarksSlide,  label: 'Benchmarks' },
   { component: EconomicsSlide,   label: 'Economics' },
   { component: FutureSlide,      label: 'Future' },
   { component: MultiModalSlide,  label: 'Multi-Modal' },
@@ -42,26 +45,38 @@ const EASE_IN   = [0.4, 0, 1, 1] as const;
 
 const slideVariants = {
   enter: (dir: number) => ({
-    x: dir > 0 ? '100%' : '-100%',
+    x: dir > 0 ? '60%' : '-60%',
     opacity: 0,
+    scale: 0.94,
+    filter: 'blur(6px)',
   }),
   center: {
     x: 0,
     opacity: 1,
-    transition: { duration: 0.55, ease: EASE_OUT },
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: { duration: 0.62, ease: EASE_OUT },
   },
   exit: (dir: number) => ({
-    x: dir < 0 ? '100%' : '-100%',
+    x: dir < 0 ? '40%' : '-40%',
     opacity: 0,
-    transition: { duration: 0.4, ease: EASE_IN },
+    scale: 0.97,
+    filter: 'blur(4px)',
+    transition: { duration: 0.32, ease: EASE_IN },
   }),
 };
 
 function App() {
   const [[current, direction], setSlide] = useState([0, 0]);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [lightMode, setLightMode] = useState(false);
+  const [transitioning, setTransitioning] = useState(false);
+  const transitionTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const paginate = useCallback((newDir: number) => {
+    setTransitioning(true);
+    if (transitionTimer.current) clearTimeout(transitionTimer.current);
+    transitionTimer.current = setTimeout(() => setTransitioning(false), 600);
     setSlide(([cur]) => {
       const next = cur + newDir;
       if (next < 0 || next >= slides.length) return [cur, newDir];
@@ -70,6 +85,9 @@ function App() {
   }, []);
 
   const goTo = useCallback((idx: number) => {
+    setTransitioning(true);
+    if (transitionTimer.current) clearTimeout(transitionTimer.current);
+    transitionTimer.current = setTimeout(() => setTransitioning(false), 600);
     setSlide(([cur]) => [idx, idx > cur ? 1 : -1]);
   }, []);
 
@@ -86,6 +104,7 @@ function App() {
       if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') { e.preventDefault(); paginate(1); }
       else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); paginate(-1); }
       else if (e.key === 'f' || e.key === 'F') { e.preventDefault(); toggleFullscreen(); }
+      else if (e.key === 'l' || e.key === 'L') { e.preventDefault(); setLightMode(m => !m); }
     };
     const onFsChange = () => setIsFullscreen(!!document.fullscreenElement);
     window.addEventListener('keydown', onKey);
@@ -103,7 +122,8 @@ function App() {
   const CurrentSlide = slides[current].component;
 
   return (
-    <div style={{ width: '100%', height: '100vh', overflow: 'hidden', position: 'relative', background: 'var(--bg-base)' }}>
+    <div className={lightMode ? 'light-mode' : ''} style={{ width: '100%', height: '100vh', overflow: 'hidden', position: 'relative', background: 'var(--bg-base)' }}>
+      {!lightMode && <StarField transitioning={transitioning} />}
       <AnimatePresence mode="wait" custom={direction}>
         <motion.div
           key={current}
@@ -121,38 +141,65 @@ function App() {
       {/* Slide counter top-left */}
       <div style={{
         position: 'fixed', top: 16, left: 20, zIndex: 1000,
-        fontFamily: 'var(--font-mono)', fontSize: '0.62rem',
+        fontFamily: 'var(--font-mono)', fontSize: '0.88rem',
         color: 'var(--text-muted)', letterSpacing: '0.1em',
         userSelect: 'none',
       }}>
         {String(current + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
-        <span style={{ marginLeft: 10, color: 'var(--amber)', opacity: 0.7 }}>{slides[current].label}</span>
+        <span style={{ marginLeft: 10, color: 'var(--amber)', opacity: 0.8 }}>{slides[current].label}</span>
       </div>
 
-      {/* Fullscreen button top-right */}
-      <motion.button
-        onClick={toggleFullscreen}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        whileHover={{ opacity: 1 }}
-        style={{
-          position: 'fixed', top: 14, right: 16, zIndex: 1000,
-          background: 'rgba(7,7,14,0.8)',
-          border: '1px solid var(--border)',
-          borderRadius: 8,
-          padding: '6px 14px',
-          color: 'var(--text-muted)',
-          fontFamily: 'var(--font-mono)',
-          fontSize: '0.62rem',
-          cursor: 'pointer',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
-          letterSpacing: '0.08em',
-          outline: 'none',
-        }}
-      >
-        {isFullscreen ? '⛶ Exit (F)' : '⛶ Fullscreen (F)'}
-      </motion.button>
+      {/* Top-right controls */}
+      <div style={{ position: 'fixed', top: 14, right: 16, zIndex: 1000, display: 'flex', gap: 8 }}>
+        <motion.button
+          onClick={() => setLightMode(m => !m)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          style={{
+            background: lightMode ? 'rgba(248,250,252,0.85)' : 'rgba(7,7,14,0.8)',
+            border: '1px solid var(--border)',
+            borderRadius: 8,
+            padding: '6px 14px',
+            color: 'var(--text-muted)',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.82rem',
+            cursor: 'pointer',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            letterSpacing: '0.08em',
+            outline: 'none',
+            transition: 'background 0.3s ease, color 0.3s ease',
+          }}
+        >
+          {lightMode ? '◑ Dark (L)' : '◐ Light (L)'}
+        </motion.button>
+        <motion.button
+          onClick={toggleFullscreen}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          style={{
+            background: lightMode ? 'rgba(248,250,252,0.85)' : 'rgba(7,7,14,0.8)',
+            border: '1px solid var(--border)',
+            borderRadius: 8,
+            padding: '6px 14px',
+            color: 'var(--text-muted)',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.82rem',
+            cursor: 'pointer',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            letterSpacing: '0.08em',
+            outline: 'none',
+            transition: 'background 0.3s ease, color 0.3s ease',
+          }}
+        >
+          {isFullscreen ? '⛶ Exit (F)' : '⛶ Full (F)'}
+        </motion.button>
+      </div>
 
       {/* Navigation dots bottom-center */}
       <div style={{

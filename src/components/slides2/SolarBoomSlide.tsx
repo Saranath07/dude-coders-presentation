@@ -29,7 +29,7 @@ const BarChart = () => {
     <div style={{ display: 'flex', alignItems: 'flex-end', gap: 10, height: 130, paddingTop: 12 }}>
       {data.map((d, i) => (
         <div key={d.year} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', color: 'var(--amber)', marginBottom: 4, opacity: 0.9 }}>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.88rem', color: 'var(--amber)', marginBottom: 4, opacity: 0.9 }}>
             {d.label}
           </span>
           <motion.div
@@ -47,7 +47,7 @@ const BarChart = () => {
               border: i === data.length - 1 ? '1px solid rgba(245,158,11,0.6)' : '1px solid rgba(245,158,11,0.15)',
             }}
           />
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', color: 'var(--text-muted)', marginTop: 5 }}>{d.year}</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.88rem', color: 'var(--text-muted)', marginTop: 5 }}>{d.year}</span>
         </div>
       ))}
     </div>
@@ -78,17 +78,17 @@ const SolarBoomSlide = () => (
           <div className="glow-rule" style={{ marginBottom: 24 }} />
           <h2
             className="h-section"
-            style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)', marginBottom: 20, lineHeight: 1.1 }}
+            style={{ fontSize: 'clamp(2.6rem, 4.2vw, 3.8rem)', marginBottom: 20, lineHeight: 1.1 }}
           >
             The World Is Going Solar —{' '}
             <span style={{ fontStyle: 'italic', color: 'var(--amber)' }}>Faster Than Anyone Expected</span>
           </h2>
-          <p className="body" style={{ fontSize: '0.95rem', marginBottom: 28 }}>
+          <p className="body" style={{ fontSize: '1.05rem', marginBottom: 28 }}>
             In 2025, solar PV surpassed <strong style={{ color: 'var(--text-primary)' }}>25% of all global energy demand growth</strong>,
             eclipsing every other energy source on the planet in a single year. The revolution is not coming. It is here.
           </p>
           <div style={{ padding: '14px 20px', background: 'var(--amber-dim)', border: '1px solid var(--amber-border)', borderRadius: 10 }}>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--amber-bright)', lineHeight: 1.6 }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.0rem', color: 'var(--amber-bright)', lineHeight: 1.6 }}>
               IEA Net Zero target: <strong>6,700 GW</strong> of solar by 2030<br />
               That requires <strong>~900 GW/yr</strong> — double the 2023 record
             </div>
@@ -114,11 +114,11 @@ const SolarBoomSlide = () => (
               transition={{ delay: 0.3 + i * 0.1, duration: 0.6 }}
               style={{ padding: '18px 20px' }}
             >
-              <div className="stat-num" style={{ fontSize: '1.9rem' }}>
+              <div className="stat-num" style={{ fontSize: '2.8rem' }}>
                 <CountUp to={s.num} suffix={s.suffix} prefix={s.prefix ?? ''} />
               </div>
               <div className="stat-label">{s.label}</div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.56rem', color: 'var(--text-muted)', marginTop: 6, lineHeight: 1.4 }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.86rem', color: 'var(--text-muted)', marginTop: 6, lineHeight: 1.4 }}>
                 {s.note}
               </div>
             </motion.div>
@@ -133,7 +133,7 @@ const SolarBoomSlide = () => (
           transition={{ delay: 0.6 }}
           style={{ padding: '16px 20px 10px' }}
         >
-          <div className="label-mono" style={{ marginBottom: 6, fontSize: '0.6rem' }}>Global Solar Capacity Additions (GW / TWh-eq)</div>
+          <div className="label-mono" style={{ marginBottom: 6, fontSize: '0.9rem' }}>Global Solar Capacity Additions (GW / TWh-eq)</div>
           <BarChart />
         </motion.div>
       </div>

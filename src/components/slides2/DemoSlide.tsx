@@ -13,12 +13,12 @@ const DemoSlide = () => (
       >
         <div className="label-mono" style={{ marginBottom: 12 }}>Live Demo</div>
         <div className="glow-rule" style={{ marginBottom: 20 }} />
-        <h2 className="h-section" style={{ fontSize: 'clamp(2rem, 3.5vw, 3.2rem)', marginBottom: 20, lineHeight: 1.1 }}>
+        <h2 className="h-section" style={{ fontSize: 'clamp(2.6rem, 4.2vw, 4.0rem)', marginBottom: 20, lineHeight: 1.1 }}>
           See It{' '}
           <span style={{ fontStyle: 'italic', color: 'var(--amber)' }}>Working</span>
         </h2>
 
-        <p className="body" style={{ fontSize: '0.95rem', marginBottom: 28, lineHeight: 1.8 }}>
+        <p className="body" style={{ fontSize: '1.05rem', marginBottom: 28, lineHeight: 1.8 }}>
           Enter any GPS coordinate. Get a structured solar audit in seconds:
           detection confidence, panel area, QC status, and a visual audit image
           with bounding boxes, buffer circles, and rejected candidates marked.
@@ -33,8 +33,8 @@ const DemoSlide = () => (
           ].map(row => (
             <div key={row.label} style={{ display: 'flex', gap: 12, alignItems: 'center', padding: '10px 14px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 10 }}>
               <span style={{ fontSize: '1.1rem' }}>{row.icon}</span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--amber)', minWidth: 52 }}>{row.label}</span>
-              <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: 'var(--text-secondary)' }}>{row.val}</span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.95rem', color: 'var(--amber)', minWidth: 52 }}>{row.label}</span>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: '1.1rem', color: 'var(--text-secondary)' }}>{row.val}</span>
             </div>
           ))}
         </div>
@@ -50,7 +50,7 @@ const DemoSlide = () => (
               color: '#000',
               borderRadius: 10,
               fontFamily: 'var(--font-mono)',
-              fontSize: '0.7rem',
+              fontSize: '1.0rem',
               fontWeight: 700,
               textDecoration: 'none',
               letterSpacing: '0.05em',
@@ -69,7 +69,7 @@ const DemoSlide = () => (
               border: '1px solid var(--border)',
               borderRadius: 10,
               fontFamily: 'var(--font-mono)',
-              fontSize: '0.7rem',
+              fontSize: '1.0rem',
               fontWeight: 600,
               textDecoration: 'none',
               letterSpacing: '0.05em',
@@ -116,7 +116,7 @@ const DemoSlide = () => (
                 padding: '4px 8px',
                 background: 'rgba(0,0,0,0.7)',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.55rem',
+                fontSize: '0.86rem',
                 color: 'var(--amber)',
               }}>
                 {img.label}

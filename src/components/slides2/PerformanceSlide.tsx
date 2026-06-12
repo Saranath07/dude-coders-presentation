@@ -108,7 +108,7 @@ const PerformanceSlide = () => (
         <motion.div initial={{ opacity: 0, y: -14 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 28 }}>
           <div className="label-mono" style={{ marginBottom: 8 }}>Part IV — Performance</div>
           <div className="glow-rule" style={{ marginBottom: 16 }} />
-          <h2 className="h-section" style={{ fontSize: 'clamp(1.8rem, 3vw, 2.8rem)', lineHeight: 1.1 }}>
+          <h2 className="h-section" style={{ fontSize: 'clamp(2.4rem, 3.8vw, 3.6rem)', lineHeight: 1.1 }}>
             The Numbers{' '}
             <span style={{ fontStyle: 'italic', color: 'var(--amber)' }}>Speak</span>
           </h2>
@@ -132,7 +132,7 @@ const PerformanceSlide = () => (
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8, alignItems: 'center' }}>
                 <span style={{
                   fontFamily: 'var(--font-body)',
-                  fontSize: '0.82rem',
+                  fontSize: '1.1rem',
                   fontWeight: m.highlight ? 700 : 400,
                   color: m.highlight ? 'var(--text-primary)' : 'var(--text-secondary)',
                   whiteSpace: 'pre',
@@ -140,10 +140,10 @@ const PerformanceSlide = () => (
                   {m.name}
                 </span>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: 'var(--text-muted)' }}>{m.note}</span>
+                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '1.0rem', color: 'var(--text-muted)' }}>{m.note}</span>
                   <span style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '0.95rem',
+                    fontSize: '1.3rem',
                     fontWeight: 700,
                     color: m.color,
                     minWidth: 40,
@@ -179,7 +179,7 @@ const PerformanceSlide = () => (
           transition={{ delay: 0.9 }}
           style={{ marginTop: 16, padding: '12px 16px', background: 'var(--green-dim)', border: '1px solid var(--green-border)', borderRadius: 10 }}
         >
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: '#4ade80', lineHeight: 1.7 }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.0rem', color: '#4ade80', lineHeight: 1.7 }}>
             Tested head-to-head against 3 SOTA Roboflow detection models on complex urban imagery
             and multi-panel rooftop scenarios — our cascade consistently produced fewer false positives
             and recovered panels missed by standard one-pass inference.
@@ -189,7 +189,7 @@ const PerformanceSlide = () => (
 
       {/* Right: radar */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
-        <div className="label-mono" style={{ fontSize: '0.58rem', textAlign: 'center' }}>Multi-Dimensional Comparison</div>
+        <div className="label-mono" style={{ fontSize: '0.88rem', textAlign: 'center' }}>Multi-Dimensional Comparison</div>
         <motion.div
           className="card"
           initial={{ opacity: 0, scale: 0.9 }}
@@ -209,7 +209,7 @@ const PerformanceSlide = () => (
             { v: '6 stages', l: 'Fallback depth' },
           ].map(s => (
             <div key={s.l} className="card" style={{ padding: '12px 14px', textAlign: 'center' }}>
-              <div className="stat-num" style={{ fontSize: '1.3rem' }}>{s.v}</div>
+              <div className="stat-num" style={{ fontSize: '1.9rem' }}>{s.v}</div>
               <div className="stat-label" style={{ fontSize: '0.54rem' }}>{s.l}</div>
             </div>
           ))}

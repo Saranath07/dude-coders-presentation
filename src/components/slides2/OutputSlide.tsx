@@ -60,11 +60,11 @@ const OutputSlide = () => {
           <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 26 }}>
             <div className="label-mono" style={{ marginBottom: 8 }}>Audit Output</div>
             <div className="glow-rule" style={{ marginBottom: 16 }} />
-            <h2 className="h-section" style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.4rem)', lineHeight: 1.1 }}>
+            <h2 className="h-section" style={{ fontSize: 'clamp(2.2rem, 3.2vw, 3.2rem)', lineHeight: 1.1 }}>
               A Verifiable{' '}
               <span style={{ fontStyle: 'italic', color: 'var(--amber)' }}>Audit Record</span>
             </h2>
-            <p className="body" style={{ fontSize: '0.88rem', marginTop: 10 }}>
+            <p className="body" style={{ fontSize: '1.18rem', marginTop: 10 }}>
               Every location produces a structured, machine-readable record answering not just <em>presence</em> but
               <em> size, location precision, confidence, and fraud risk</em>.
             </p>
@@ -83,7 +83,7 @@ const OutputSlide = () => {
                   background: tab === t ? 'var(--amber-dim)' : 'var(--bg-card)',
                   color: tab === t ? 'var(--amber-bright)' : 'var(--text-muted)',
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.65rem',
+                  fontSize: '0.95rem',
                   cursor: 'pointer',
                   transition: 'all 0.2s',
                   outline: 'none',
@@ -114,10 +114,10 @@ const OutputSlide = () => {
                     gap: 12,
                   }}
                 >
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--text-secondary)' }}>{f.key}</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.0rem', color: 'var(--text-secondary)' }}>{f.key}</span>
                   <div style={{ textAlign: 'right' }}>
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', fontWeight: 700, color: f.color }}>{f.value}</div>
-                    <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.65rem', color: 'var(--text-muted)' }}>{f.note}</div>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.05rem', fontWeight: 700, color: f.color }}>{f.value}</div>
+                    <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.95rem', color: 'var(--text-muted)' }}>{f.note}</div>
                   </div>
                 </motion.div>
               ))}
@@ -131,7 +131,7 @@ const OutputSlide = () => {
             >
               <pre style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.7rem',
+                fontSize: '1.0rem',
                 color: 'var(--text-secondary)',
                 whiteSpace: 'pre',
                 lineHeight: 1.7,
@@ -157,7 +157,7 @@ const OutputSlide = () => {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
           {/* Math */}
           <div>
-            <div className="label-mono" style={{ marginBottom: 12, fontSize: '0.58rem' }}>The Math Behind the Numbers</div>
+            <div className="label-mono" style={{ marginBottom: 12, fontSize: '0.88rem' }}>The Math Behind the Numbers</div>
             {mathLines.map((m, i) => (
               <motion.div
                 key={m.label}
@@ -167,10 +167,10 @@ const OutputSlide = () => {
                 transition={{ delay: 0.3 + i * 0.12 }}
                 style={{ padding: '16px 18px', marginBottom: 12, borderColor: m.color + '44' }}
               >
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: m.color, marginBottom: 8 }}>{m.label}</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9rem', color: m.color, marginBottom: 8 }}>{m.label}</div>
                 <div style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.7rem',
+                  fontSize: '1.0rem',
                   color: 'var(--text-primary)',
                   background: 'var(--bg-surface)',
                   padding: '8px 12px',
@@ -180,14 +180,14 @@ const OutputSlide = () => {
                 }}>
                   {m.formula}
                 </div>
-                <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--text-muted)' }}>{m.note}</div>
+                <div style={{ fontFamily: 'var(--font-body)', fontSize: '1.0rem', color: 'var(--text-muted)' }}>{m.note}</div>
               </motion.div>
             ))}
           </div>
 
           {/* QC Status */}
           <div>
-            <div className="label-mono" style={{ marginBottom: 12, fontSize: '0.58rem' }}>QC Status Logic</div>
+            <div className="label-mono" style={{ marginBottom: 12, fontSize: '0.88rem' }}>QC Status Logic</div>
             {qcRules.map((r, i) => (
               <motion.div
                 key={r.status}
@@ -207,10 +207,10 @@ const OutputSlide = () => {
               >
                 <span style={{ fontSize: '1.2rem', color: r.color, lineHeight: 1 }}>{r.icon}</span>
                 <div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', fontWeight: 700, color: r.color, marginBottom: 4 }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.0rem', fontWeight: 700, color: r.color, marginBottom: 4 }}>
                     {r.status}
                   </div>
-                  <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                  <div style={{ fontFamily: 'var(--font-body)', fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
                     {r.condition}
                   </div>
                 </div>

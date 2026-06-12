@@ -118,11 +118,11 @@ const MultiModalSlide = () => {
         <motion.div initial={{ opacity: 0, y: -14 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 26 }}>
           <div className="label-mono" style={{ marginBottom: 8 }}>Signal 5 — Multi-Modal Architecture</div>
           <div className="glow-rule" style={{ marginBottom: 12 }} />
-          <h2 className="h-section" style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.4rem)', lineHeight: 1.1 }}>
+          <h2 className="h-section" style={{ fontSize: 'clamp(2.2rem, 3.2vw, 3.2rem)', lineHeight: 1.1 }}>
             Each Modality Sees What the{' '}
             <span style={{ fontStyle: 'italic', color: 'var(--amber)' }}>Others Cannot</span>
           </h2>
-          <p className="body" style={{ fontSize: '0.85rem', marginTop: 8, maxWidth: 640 }}>
+          <p className="body" style={{ fontSize: '1.15rem', marginTop: 8, maxWidth: 640 }}>
             RGB fails in clouds; SAR doesn't. Multispectral confuses pools and panels; thermal distinguishes them by heat.
             Smart meters confirm generation but can't localize; vision localizes but can't confirm. Together, they are <strong style={{ color: 'var(--text-primary)' }}>mutually verifying</strong>.
           </p>
@@ -131,7 +131,7 @@ const MultiModalSlide = () => {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: 20, alignItems: 'center' }}>
           {/* Inputs */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <div className="label-mono" style={{ marginBottom: 4, fontSize: '0.56rem' }}>Input Modalities</div>
+            <div className="label-mono" style={{ marginBottom: 4, fontSize: '0.86rem' }}>Input Modalities</div>
             {inputs.map((inp, i) => (
               <motion.div
                 key={inp.label}
@@ -154,9 +154,9 @@ const MultiModalSlide = () => {
               >
                 <div style={{ width: 8, height: 8, borderRadius: '50%', background: inp.color, boxShadow: `0 0 8px ${inp.color}`, flexShrink: 0 }} />
                 <div>
-                  <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-primary)' }}>{inp.label}</div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', color: 'var(--text-muted)' }}>{inp.sub}</div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: inp.color, marginTop: 2 }}>→ {inp.encoder}</div>
+                  <div style={{ fontFamily: 'var(--font-body)', fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{inp.label}</div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.88rem', color: 'var(--text-muted)' }}>{inp.sub}</div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9rem', color: inp.color, marginTop: 2 }}>→ {inp.encoder}</div>
                 </div>
               </motion.div>
             ))}
@@ -169,7 +169,7 @@ const MultiModalSlide = () => {
             transition={{ delay: 0.6, duration: 0.8 }}
             style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, width: 300 }}
           >
-            <div className="label-mono" style={{ fontSize: '0.56rem', textAlign: 'center' }}>Cross-Modal Attention Fusion</div>
+            <div className="label-mono" style={{ fontSize: '0.86rem', textAlign: 'center' }}>Cross-Modal Attention Fusion</div>
             <div className="card" style={{ padding: '10px', width: '100%', borderColor: 'var(--amber-border)' }}>
               <FusionFlow />
             </div>
@@ -179,7 +179,7 @@ const MultiModalSlide = () => {
               border: '1px solid var(--amber-border)',
               borderRadius: 8,
               fontFamily: 'var(--font-mono)',
-              fontSize: '0.62rem',
+              fontSize: '0.92rem',
               color: 'var(--amber-bright)',
               textAlign: 'center',
             }}>
@@ -189,7 +189,7 @@ const MultiModalSlide = () => {
 
           {/* Outputs */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <div className="label-mono" style={{ marginBottom: 4, fontSize: '0.56rem' }}>Unified Outputs</div>
+            <div className="label-mono" style={{ marginBottom: 4, fontSize: '0.86rem' }}>Unified Outputs</div>
             {outputs.map((out, i) => (
               <motion.div
                 key={out.label}
@@ -207,8 +207,8 @@ const MultiModalSlide = () => {
                   borderRadius: '10px 0 0 10px',
                 }}
               >
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: out.color, flexShrink: 0 }}>→</div>
-                <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{out.label}</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.92rem', color: out.color, flexShrink: 0 }}>→</div>
+                <div style={{ fontFamily: 'var(--font-body)', fontSize: '1.1rem', color: 'var(--text-secondary)' }}>{out.label}</div>
               </motion.div>
             ))}
           </div>

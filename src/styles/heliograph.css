@@ -7,7 +7,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,600;1,9..144,900&family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
 
 /* ==============================
-   CSS VARIABLES
+   CSS VARIABLES — DARK MODE (default)
    ============================== */
 :root {
   --bg-base:        #04040A;
@@ -19,29 +19,29 @@
   --amber:          #F59E0B;
   --amber-bright:   #FCD34D;
   --amber-muted:    rgba(245, 158, 11, 0.5);
-  --amber-dim:      rgba(245, 158, 11, 0.10);
-  --amber-border:   rgba(245, 158, 11, 0.22);
+  --amber-dim:      rgba(245, 158, 11, 0.12);
+  --amber-border:   rgba(245, 158, 11, 0.28);
 
   --teal:           #14B8A6;
   --teal-bright:    #2DD4BF;
-  --teal-dim:       rgba(20, 184, 166, 0.10);
-  --teal-border:    rgba(20, 184, 166, 0.22);
+  --teal-dim:       rgba(20, 184, 166, 0.12);
+  --teal-border:    rgba(20, 184, 166, 0.28);
 
   --red:            #EF4444;
-  --red-dim:        rgba(239, 68, 68, 0.10);
-  --red-border:     rgba(239, 68, 68, 0.22);
+  --red-dim:        rgba(239, 68, 68, 0.12);
+  --red-border:     rgba(239, 68, 68, 0.28);
 
   --green:          #22C55E;
-  --green-dim:      rgba(34, 197, 94, 0.10);
-  --green-border:   rgba(34, 197, 94, 0.22);
+  --green-dim:      rgba(34, 197, 94, 0.12);
+  --green-border:   rgba(34, 197, 94, 0.28);
 
   --text-primary:   #F1F5F9;
   --text-secondary: #94A3B8;
   --text-muted:     #475569;
   --text-dim:       #1E293B;
 
-  --border:         rgba(241, 245, 249, 0.055);
-  --border-bright:  rgba(241, 245, 249, 0.10);
+  --border:         rgba(241, 245, 249, 0.07);
+  --border-bright:  rgba(241, 245, 249, 0.13);
 
   --font-display:   'Fraunces', Georgia, 'Times New Roman', serif;
   --font-mono:      'JetBrains Mono', 'Courier New', monospace;
@@ -51,6 +51,67 @@
   --ease-out:       cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out:    cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* ==============================
+   LIGHT MODE OVERRIDES
+   ============================== */
+.light-mode {
+  --bg-base:        #F8FAFC;
+  --bg-surface:     #F1F5F9;
+  --bg-card:        #FFFFFF;
+  --bg-card-hover:  #F8FAFC;
+  --bg-elevated:    #EEF2F7;
+
+  --amber:          #D97706;
+  --amber-bright:   #B45309;
+  --amber-muted:    rgba(217, 119, 6, 0.5);
+  --amber-dim:      rgba(217, 119, 6, 0.08);
+  --amber-border:   rgba(217, 119, 6, 0.30);
+
+  --teal:           #0D9488;
+  --teal-bright:    #0F766E;
+  --teal-dim:       rgba(13, 148, 136, 0.08);
+  --teal-border:    rgba(13, 148, 136, 0.30);
+
+  --red:            #DC2626;
+  --red-dim:        rgba(220, 38, 38, 0.08);
+  --red-border:     rgba(220, 38, 38, 0.28);
+
+  --green:          #16A34A;
+  --green-dim:      rgba(22, 163, 74, 0.08);
+  --green-border:   rgba(22, 163, 74, 0.28);
+
+  --text-primary:   #0F172A;
+  --text-secondary: #334155;
+  --text-muted:     #64748B;
+  --text-dim:       #CBD5E1;
+
+  --border:         rgba(15, 23, 42, 0.08);
+  --border-bright:  rgba(15, 23, 42, 0.14);
+}
+
+.light-mode body { background: var(--bg-base); color: var(--text-primary); }
+.light-mode .slide { background: var(--bg-base); }
+.light-mode .slide::before {
+  background-image: radial-gradient(rgba(15, 23, 42, 0.06) 1px, transparent 1px);
+}
+.light-mode body::after { opacity: 0.006; }
+.light-mode .glow-amber-tr {
+  background: radial-gradient(circle, rgba(217,119,6,0.08) 0%, transparent 70%);
+}
+.light-mode .glow-teal-bl {
+  background: radial-gradient(circle, rgba(13,148,136,0.06) 0%, transparent 70%);
+}
+.light-mode .glow-amber-center {
+  background: radial-gradient(circle, rgba(217,119,6,0.05) 0%, transparent 65%);
+}
+.light-mode .card {
+  box-shadow: 0 2px 12px rgba(15,23,42,0.06);
+}
+.light-mode .card:hover {
+  box-shadow: 0 4px 20px rgba(15,23,42,0.10);
+}
+.light-mode .stat-num { color: var(--amber); }
 
 /* ==============================
    RESET
@@ -74,6 +135,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
+  font-size: 18px;
 }
 
 /* Film grain overlay */
@@ -99,7 +161,8 @@ body::after {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  background: var(--bg-base);
+  background: transparent;
+  z-index: 2;
 }
 
 /* Dot grid background */
@@ -108,7 +171,7 @@ body::after {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: radial-gradient(rgba(241, 245, 249, 0.06) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(241, 245, 249, 0.07) 1px, transparent 1px);
   background-size: 44px 44px;
   mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 0%, transparent 100%);
   -webkit-mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 0%, transparent 100%);
@@ -127,7 +190,7 @@ body::after {
 }
 
 /* ==============================
-   TYPOGRAPHY
+   TYPOGRAPHY — BOOSTED
    ============================== */
 .h-display {
   font-family: var(--font-display);
@@ -148,7 +211,7 @@ body::after {
 
 .label-mono {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.92rem;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -157,7 +220,7 @@ body::after {
 
 .body {
   font-family: var(--font-body);
-  font-size: 1.05rem;
+  font-size: 1.25rem;
   line-height: 1.75;
   color: var(--text-secondary);
 }
@@ -169,22 +232,24 @@ body::after {
   position: absolute;
   top: -200px;
   right: -200px;
-  width: 700px;
-  height: 700px;
+  width: 800px;
+  height: 800px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(245,158,11,0.09) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(245,158,11,0.11) 0%, transparent 70%);
   pointer-events: none;
+  animation: glow-breathe 6s ease-in-out infinite;
 }
 
 .glow-teal-bl {
   position: absolute;
   bottom: -200px;
   left: -200px;
-  width: 600px;
-  height: 600px;
+  width: 700px;
+  height: 700px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(20,184,166,0.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(20,184,166,0.09) 0%, transparent 70%);
   pointer-events: none;
+  animation: glow-breathe 7s ease-in-out infinite 1.5s;
 }
 
 .glow-amber-center {
@@ -192,11 +257,12 @@ body::after {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 800px;
-  height: 800px;
+  width: 900px;
+  height: 900px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 65%);
   pointer-events: none;
+  animation: glow-breathe 8s ease-in-out infinite;
 }
 
 /* ==============================
@@ -205,13 +271,15 @@ body::after {
 .card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 14px;
-  transition: border-color 0.3s ease, background 0.3s ease;
+  border-radius: 16px;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.25s var(--ease-out);
 }
 
 .card:hover {
   border-color: var(--amber-border);
   background: var(--bg-card-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 32px rgba(245,158,11,0.06);
 }
 
 .card-p {
@@ -222,7 +290,7 @@ body::after {
 .card.red:hover  { border-color: var(--red-border); }
 
 /* ==============================
-   STAT DISPLAY
+   STAT DISPLAY — BIGGER
    ============================== */
 .stat-num {
   font-family: var(--font-mono);
@@ -231,11 +299,12 @@ body::after {
   line-height: 1;
   letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
+  font-size: 2.2rem;
 }
 
 .stat-label {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.82rem;
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -244,20 +313,24 @@ body::after {
 }
 
 /* ==============================
-   BADGE / PILL
+   BADGE / PILL — BIGGER
    ============================== */
 .badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 12px;
+  padding: 5px 14px;
   border-radius: 100px;
   font-family: var(--font-mono);
-  font-size: 0.64rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.10em;
   text-transform: uppercase;
   white-space: nowrap;
+  transition: transform 0.2s var(--ease-out), box-shadow 0.2s ease;
+}
+.badge:hover {
+  transform: scale(1.04);
 }
 .badge-amber {
   background: var(--amber-dim);
@@ -284,11 +357,11 @@ body::after {
    DIVIDER
    ============================== */
 .glow-rule {
-  width: 48px;
-  height: 2px;
+  width: 56px;
+  height: 2.5px;
   background: var(--amber);
-  box-shadow: 0 0 12px var(--amber);
-  border-radius: 1px;
+  box-shadow: 0 0 16px var(--amber), 0 0 32px rgba(245,158,11,0.3);
+  border-radius: 2px;
   flex-shrink: 0;
 }
 
@@ -300,10 +373,10 @@ body::after {
   border-collapse: collapse;
 }
 .helo-table th {
-  padding: 10px 14px;
+  padding: 12px 16px;
   text-align: left;
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.82rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--amber);
@@ -311,10 +384,10 @@ body::after {
   font-weight: 600;
 }
 .helo-table td {
-  padding: 12px 14px;
+  padding: 14px 16px;
   border-bottom: 1px solid var(--border);
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 1.05rem;
 }
 .helo-table tr:last-child td { border-bottom: none; }
 .helo-table tr.hl td {
@@ -324,7 +397,7 @@ body::after {
 }
 .helo-table tr.hl td:first-child {
   border-left: 3px solid var(--amber);
-  padding-left: 11px;
+  padding-left: 13px;
 }
 
 /* ==============================
@@ -358,6 +431,55 @@ body::after {
   0%   { top: 0; opacity: 0.5; }
   100% { top: 100%; opacity: 0; }
 }
+@keyframes glow-breathe {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50%      { transform: scale(1.08); opacity: 1; }
+}
+@keyframes shimmer-slide {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes pop-in {
+  0%   { transform: scale(0.85); opacity: 0; }
+  70%  { transform: scale(1.04); }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes slide-up-fade {
+  from { transform: translateY(28px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
 
-.animate-pulse-amber { animation: pulse-amber 2.5s ease-in-out infinite; }
-.animate-float-up    { animation: float-up 3s ease-in-out infinite; }
+.animate-pulse-amber  { animation: pulse-amber 2.5s ease-in-out infinite; }
+.animate-float-up     { animation: float-up 3s ease-in-out infinite; }
+.animate-glow-breathe { animation: glow-breathe 5s ease-in-out infinite; }
+.animate-spin-slow    { animation: spin-slow 12s linear infinite; }
+.animate-pop-in       { animation: pop-in 0.55s var(--ease-spring) both; }
+.animate-slide-up     { animation: slide-up-fade 0.5s var(--ease-out) both; }
+
+/* Stagger helpers for CSS-only sequences */
+.stagger-1 { animation-delay: 0.08s; }
+.stagger-2 { animation-delay: 0.16s; }
+.stagger-3 { animation-delay: 0.24s; }
+.stagger-4 { animation-delay: 0.32s; }
+.stagger-5 { animation-delay: 0.40s; }
+
+/* Shimmer skeleton */
+.shimmer {
+  background: linear-gradient(90deg, var(--bg-card) 0%, var(--bg-elevated) 50%, var(--bg-card) 100%);
+  background-size: 400px 100%;
+  animation: shimmer-slide 1.5s ease-in-out infinite;
+}
+
+/* Glowing accent border */
+.glow-border-amber {
+  border: 1px solid var(--amber-border);
+  box-shadow: 0 0 0 1px rgba(245,158,11,0.1), 0 0 16px rgba(245,158,11,0.08);
+}
+.glow-border-teal {
+  border: 1px solid var(--teal-border);
+  box-shadow: 0 0 0 1px rgba(20,184,166,0.1), 0 0 16px rgba(20,184,166,0.08);
+}

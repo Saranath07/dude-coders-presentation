@@ -135,10 +135,10 @@ const CascadeSlide = () => {
           <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 24 }}>
             <div className="label-mono" style={{ marginBottom: 8 }}>Pillar 3 — Inference Cascade</div>
             <div className="glow-rule" style={{ marginBottom: 14 }} />
-            <h2 className="h-section" style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.4rem)', lineHeight: 1.1 }}>
+            <h2 className="h-section" style={{ fontSize: 'clamp(2.2rem, 3.2vw, 3.2rem)', lineHeight: 1.1 }}>
               The 6-Stage Fallback Strategy
             </h2>
-            <p className="body" style={{ fontSize: '0.85rem', marginTop: 8 }}>
+            <p className="body" style={{ fontSize: '1.15rem', marginTop: 8 }}>
               Each stage only runs if the previous failed. Steps 5 & 6 are free — they reuse cached detections, just re-evaluated at a larger radius.
             </p>
           </motion.div>
@@ -171,7 +171,7 @@ const CascadeSlide = () => {
                   background: activeStage === i ? stage.color : 'transparent',
                   border: `1.5px solid ${stage.color}`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontFamily: 'var(--font-mono)', fontSize: '0.65rem', fontWeight: 700,
+                  fontFamily: 'var(--font-mono)', fontSize: '0.95rem', fontWeight: 700,
                   color: activeStage === i ? '#000' : stage.color,
                   transition: 'all 0.25s',
                 }}>
@@ -179,16 +179,16 @@ const CascadeSlide = () => {
                 </div>
 
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-primary)', display: 'flex', gap: 8, alignItems: 'center' }}>
+                  <div style={{ fontFamily: 'var(--font-body)', fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)', display: 'flex', gap: 8, alignItems: 'center' }}>
                     {stage.name}
                     {(stage as { free?: boolean }).free && <span className="badge-teal badge" style={{ fontSize: '0.5rem', padding: '2px 8px' }}>FREE</span>}
                   </div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--text-muted)', marginTop: 2 }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.92rem', color: 'var(--text-muted)', marginTop: 2 }}>
                     {stage.method}
                   </div>
                 </div>
 
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: stage.color, flexShrink: 0 }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.92rem', color: stage.color, flexShrink: 0 }}>
                   {stage.buffer}
                 </div>
 
@@ -219,7 +219,7 @@ const CascadeSlide = () => {
               className="card"
               style={{ padding: '20px', borderColor: s.color + '55' }}
             >
-              <div className="label-mono" style={{ marginBottom: 10, fontSize: '0.6rem', color: s.color }}>
+              <div className="label-mono" style={{ marginBottom: 10, fontSize: '0.9rem', color: s.color }}>
                 STAGE {s.n} — LIVE SIMULATION
               </div>
               <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 14 }}>
@@ -234,7 +234,7 @@ const CascadeSlide = () => {
                 ].map(kv => (
                   <div key={kv.l} style={{ background: 'var(--bg-surface)', borderRadius: 6, padding: '8px 10px' }}>
                     <div className="stat-label" style={{ fontSize: '0.52rem' }}>{kv.l}</div>
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--text-primary)', fontWeight: 600, marginTop: 2 }}>{kv.v}</div>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.0rem', color: 'var(--text-primary)', fontWeight: 600, marginTop: 2 }}>{kv.v}</div>
                   </div>
                 ))}
               </div>
@@ -244,7 +244,7 @@ const CascadeSlide = () => {
           {/* GSD math */}
           <div className="card" style={{ padding: '16px 18px', borderColor: 'var(--amber-border)' }}>
             <div className="label-mono" style={{ marginBottom: 8, fontSize: '0.57rem' }}>Buffer Geometry @ 21°N India</div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--text-secondary)', lineHeight: 1.8 }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.98rem', color: 'var(--text-secondary)', lineHeight: 1.8 }}>
               GSD = <span style={{ color: 'var(--amber)' }}>0.059 m/px</span> @ Zoom 20<br />
               r₁ = <span style={{ color: 'var(--amber)' }}>5.96 m</span> (1,200 sqft ≈ 111.5 m²)<br />
               r₂ = <span style={{ color: '#a78bfa' }}>8.43 m</span> (2,400 sqft ≈ 223 m²)

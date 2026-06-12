@@ -78,7 +78,7 @@ const ConclusionSlide = () => (
           <div className="glow-rule" style={{ marginBottom: 20 }} />
           <h2
             className="h-section"
-            style={{ fontSize: 'clamp(2rem, 3.5vw, 3.2rem)', lineHeight: 1.05, marginBottom: 20 }}
+            style={{ fontSize: 'clamp(2.6rem, 4.2vw, 4.0rem)', lineHeight: 1.05, marginBottom: 20 }}
           >
             The Intelligence Layer{' '}
             <span style={{ fontStyle: 'italic', color: 'var(--amber)' }}>the Energy Transition Needs</span>
@@ -108,8 +108,8 @@ const ConclusionSlide = () => (
               transition={{ delay: 0.3 + i * 0.1 }}
               style={{ padding: '16px 18px', borderLeft: `3px solid ${kp.color}` }}
             >
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', fontWeight: 700, color: kp.color, marginBottom: 4 }}>{kp.label}</div>
-              <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>{kp.note}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.05rem', fontWeight: 700, color: kp.color, marginBottom: 4 }}>{kp.label}</div>
+              <div style={{ fontFamily: 'var(--font-body)', fontSize: '1.0rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>{kp.note}</div>
             </motion.div>
           ))}
         </div>
@@ -121,7 +121,7 @@ const ConclusionSlide = () => (
           transition={{ delay: 0.8 }}
           style={{ padding: '18px 22px', background: 'var(--amber-dim)', border: '1px solid var(--amber-border)', borderRadius: 12 }}
         >
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--amber-bright)', lineHeight: 1.8 }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.05rem', color: 'var(--amber-bright)', lineHeight: 1.8 }}>
             Not just detection — <strong>verification</strong>.<br />
             Not just counting panels — <strong>measuring their health</strong>.<br />
             Not just a snapshot — a <strong>continuous, multi-modal audit system</strong> for the global solar fleet.
@@ -135,7 +135,7 @@ const ConclusionSlide = () => (
           transition={{ delay: 1 }}
           style={{ marginTop: 20, display: 'flex', gap: 12, alignItems: 'center' }}
         >
-          <span className="label-mono" style={{ color: 'var(--text-muted)', fontSize: '0.6rem' }}>
+          <span className="label-mono" style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
             Team Dude Coders · IIT Madras · EcoInnovators 2026
           </span>
         </motion.div>

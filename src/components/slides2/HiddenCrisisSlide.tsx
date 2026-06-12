@@ -135,12 +135,12 @@ const HiddenCrisisSlide = () => {
           <div className="glow-rule" style={{ marginBottom: 16 }} />
           <h2
             className="h-section"
-            style={{ fontSize: 'clamp(1.8rem, 3vw, 2.6rem)' }}
+            style={{ fontSize: 'clamp(2.4rem, 3.8vw, 3.4rem)' }}
           >
             Millions of Panels.{' '}
             <span style={{ fontStyle: 'italic', color: 'var(--amber)' }}>No One's Watching.</span>
           </h2>
-          <p className="body" style={{ fontSize: '0.9rem', marginTop: 8, maxWidth: 560 }}>
+          <p className="body" style={{ fontSize: '1.2rem', marginTop: 8, maxWidth: 560 }}>
             42% of all solar additions are distributed/rooftop — largely invisible to grid operators, governments, and financial auditors.
           </p>
         </motion.div>
@@ -165,10 +165,10 @@ const HiddenCrisisSlide = () => {
                   outline: 'none',
                 }}
               >
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: c.color, letterSpacing: '0.1em', marginBottom: 4 }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9rem', color: c.color, letterSpacing: '0.1em', marginBottom: 4 }}>
                   CRISIS {c.num}
                 </div>
-                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '0.95rem', lineHeight: 1.2 }}>
+                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '1.05rem', lineHeight: 1.2 }}>
                   {c.title}
                 </div>
               </motion.button>
@@ -196,7 +196,7 @@ const HiddenCrisisSlide = () => {
 
             {crisis.viz && (
               <div style={{ background: 'var(--bg-surface)', borderRadius: 10, padding: '14px 16px', border: '1px solid var(--border)' }}>
-                <div className="label-mono" style={{ marginBottom: 8, fontSize: '0.58rem' }}>Duck Curve — CAISO-style load profile</div>
+                <div className="label-mono" style={{ marginBottom: 8, fontSize: '0.88rem' }}>Duck Curve — CAISO-style load profile</div>
                 {crisis.viz}
               </div>
             )}
@@ -205,7 +205,7 @@ const HiddenCrisisSlide = () => {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                 {[['₹75,000 Cr', 'Subsidy budget'], ['10M', 'Installs targeted'], ['0', 'Monitoring systems'], ['~$9B', 'Unverified capital']].map(([v, l]) => (
                   <div key={l} style={{ background: 'var(--bg-surface)', borderRadius: 8, padding: '14px 16px', border: '1px solid var(--red-border)' }}>
-                    <div className="stat-num" style={{ fontSize: '1.4rem', color: '#EF4444' }}>{v}</div>
+                    <div className="stat-num" style={{ fontSize: '2.2rem', color: '#EF4444' }}>{v}</div>
                     <div className="stat-label">{l}</div>
                   </div>
                 ))}
@@ -214,7 +214,7 @@ const HiddenCrisisSlide = () => {
 
             {active === 2 && (
               <div style={{ padding: '18px 20px', background: 'var(--teal-dim)', border: '1px solid var(--teal-border)', borderRadius: 10 }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--teal-bright)', lineHeight: 1.7 }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.0rem', color: 'var(--teal-bright)', lineHeight: 1.7 }}>
                   The gap between what is <em>reported</em> and what <em>exists</em>.<br />
                   Every national solar inventory carries an unknown margin of error.
                 </div>

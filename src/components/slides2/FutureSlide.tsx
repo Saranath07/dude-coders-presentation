@@ -57,11 +57,11 @@ const FutureSlide = () => {
         <motion.div initial={{ opacity: 0, y: -14 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 28 }}>
           <div className="label-mono" style={{ marginBottom: 8 }}>Part VI — Beyond RGB</div>
           <div className="glow-rule" style={{ marginBottom: 14 }} />
-          <h2 className="h-section" style={{ fontSize: 'clamp(1.8rem, 3vw, 2.8rem)', lineHeight: 1.1 }}>
+          <h2 className="h-section" style={{ fontSize: 'clamp(2.4rem, 3.8vw, 3.6rem)', lineHeight: 1.1 }}>
             What We Built Is{' '}
             <span style={{ fontStyle: 'italic', color: 'var(--amber)' }}>Just the Beginning</span>
           </h2>
-          <p className="body" style={{ fontSize: '0.88rem', marginTop: 8, maxWidth: 560 }}>
+          <p className="body" style={{ fontSize: '1.18rem', marginTop: 8, maxWidth: 560 }}>
             Our system operates on RGB imagery. The electromagnetic spectrum contains far more information about solar panels than human eyes can see.
           </p>
         </motion.div>
@@ -86,8 +86,8 @@ const FutureSlide = () => {
                   transition: 'all 0.25s ease',
                 }}
               >
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.64rem', color: s.color, marginBottom: 4 }}>{s.label}</div>
-                <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: active === i ? 'var(--text-primary)' : 'var(--text-secondary)', lineHeight: 1.3 }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.95rem', color: s.color, marginBottom: 4 }}>{s.label}</div>
+                <div style={{ fontFamily: 'var(--font-body)', fontSize: '1.05rem', color: active === i ? 'var(--text-primary)' : 'var(--text-secondary)', lineHeight: 1.3 }}>
                   {s.title}
                 </div>
               </motion.button>
@@ -108,22 +108,22 @@ const FutureSlide = () => {
                   background: sig.color + '18',
                   border: `1px solid ${sig.color}44`,
                   color: sig.color,
-                  fontSize: '0.6rem',
+                  fontSize: '0.9rem',
                 }}>
                   {sig.badge}
                 </span>
               </div>
 
-              <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.35rem', color: 'var(--text-primary)', marginBottom: 14, lineHeight: 1.2 }}>
+              <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '2.0rem', color: 'var(--text-primary)', marginBottom: 14, lineHeight: 1.2 }}>
                 {sig.title}
               </h3>
 
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: 16 }}>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.18rem', color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: 16 }}>
                 {sig.body}
               </p>
 
               <div style={{ padding: '12px 16px', background: sig.color + '12', border: `1px solid ${sig.color}33`, borderRadius: 8 }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: sig.color, lineHeight: 1.6 }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.0rem', color: sig.color, lineHeight: 1.6 }}>
                   → {sig.note}
                 </div>
               </div>
@@ -143,7 +143,7 @@ const FutureSlide = () => {
                     textAlign: 'center',
                   }}
                 >
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', fontWeight: 600, color: sig.color, lineHeight: 1.3 }}>{s}</div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.0rem', fontWeight: 600, color: sig.color, lineHeight: 1.3 }}>{s}</div>
                 </div>
               ))}
             </div>
