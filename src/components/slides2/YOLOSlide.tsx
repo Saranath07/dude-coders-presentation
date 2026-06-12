@@ -1,5 +1,8 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import 'katex/dist/katex.min.css';
+import { InlineMath } from 'react-katex';
 
 const ArchBlock = ({
   label, sublabel, color, x, y, width = 90, height = 38, active, onClick
@@ -40,10 +43,10 @@ const Arrow = ({ x1, y1, x2, y2, color = 'rgba(241,245,249,0.15)' }: { x1: numbe
   <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth={1} markerEnd="url(#arrow)" />
 );
 
-const details: Record<string, { title: string; body: string }> = {
+const details: Record<string, { title: string; body: React.ReactNode }> = {
   Input: {
     title: '1024×1024 Satellite Input',
-    body: 'High-resolution RGB patches from Google Maps Static API at Zoom Level 20 (~6cm/pixel over India). Higher resolution than standard YOLO training captures rooftop panel detail.',
+    body: <>High-resolution RGB patches from Google Maps Static API at Zoom Level 20 (<InlineMath math="\approx 6\,\text{cm/px}" /> over India). Higher resolution than standard YOLO training captures rooftop panel detail.</>,
   },
   'R-ELAN': {
     title: 'Residual Efficient Layer Aggregation Network',
@@ -51,7 +54,7 @@ const details: Record<string, { title: string; body: string }> = {
   },
   'A² (×3)': {
     title: 'Area Attention Module',
-    body: 'Divides feature maps into local windows, computes attention within and across windows. Focuses compute on regions likely to contain solar panels — not every pixel equally.',
+    body: <>Divides feature maps into local windows, computes attention within and across windows. Focuses compute on regions likely to contain solar panels — not every pixel equally.</>,
   },
   'AIFI': {
     title: 'Attention-based Intra-scale Feature Interaction',
@@ -63,11 +66,11 @@ const details: Record<string, { title: string; body: string }> = {
   },
   Detection: {
     title: 'Bounding Box Output',
-    body: 'Returns [x, y, w, h] + confidence score. Used for GPS distance calculation (Euclidean to claimed coordinate) and QC classification. If distance > buffer radius → ghost panel alert.',
+    body: <>Returns <InlineMath math="[x,\,y,\,w,\,h]" /> + confidence score. Used for GPS distance calculation (Euclidean to claimed coordinate) and QC classification. If <InlineMath math="d > r_{\text{buffer}}" /> → ghost panel alert.</>,
   },
   Segmentation: {
     title: 'Pixel-Level Mask Output',
-    body: 'Pixel-accurate boundary masks enable GSD-based area estimation. Area (m²) = W×H (pixels) × GSD². GSD corrected for Mercator distortion at each latitude.',
+    body: <>Pixel-accurate boundary masks enable GSD-based area estimation: <InlineMath math="\text{Area (m}^2) = W \times H_{\text{px}} \times \text{GSD}^2" />. GSD corrected for Mercator distortion at each latitude.</>,
   },
 };
 
@@ -104,66 +107,66 @@ const YOLOSlide = () => {
             className="card"
             style={{ padding: '20px', overflow: 'visible' }}
           >
-            <svg viewBox="0 0 560 220" width="100%" style={{ overflow: 'visible' }}>
+            <svg viewBox="0 0 640 220" width="100%" style={{ overflow: 'visible' }}>
               <defs>
                 <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
                   <path d="M0,0 L6,3 L0,6 Z" fill="rgba(241,245,249,0.2)" />
                 </marker>
               </defs>
 
-              {/* Input */}
-              <ArchBlock label="Input" sublabel="1024×1024" color="#94A3B8" x={10} y={91} width={80} height={38}
+              {/* Input — col 0 */}
+              <ArchBlock label="Input" sublabel="1024×1024" color="#94A3B8" x={8} y={91} width={82} height={38}
                 active={activeBlock === 'Input'} onClick={() => toggle('Input')} />
-              <Arrow x1={90} y1={110} x2={110} y2={110} />
+              <Arrow x1={90} y1={110} x2={112} y2={110} />
 
-              {/* Backbone */}
-              <text x={150} y={16} textAnchor="middle" fill="rgba(20,184,166,0.7)" fontSize={8} fontFamily="var(--font-mono,monospace)" letterSpacing={2}>BACKBONE</text>
-              <ArchBlock label="R-ELAN" sublabel="×4" color="#14B8A6" x={110} y={55} width={80} height={38}
+              {/* Backbone — col 1: x 112-204 */}
+              <text x={158} y={16} textAnchor="middle" fill="rgba(20,184,166,0.7)" fontSize={8} fontFamily="var(--font-mono,monospace)" letterSpacing={2}>BACKBONE</text>
+              <ArchBlock label="R-ELAN" sublabel="×4" color="#14B8A6" x={112} y={55} width={80} height={38}
                 active={activeBlock === 'R-ELAN'} onClick={() => toggle('R-ELAN')} />
-              <ArchBlock label="A² (×3)" sublabel="AreaAttn" color="#14B8A6" x={110} y={127} width={80} height={38}
+              <ArchBlock label="A² (×3)" sublabel="AreaAttn" color="#14B8A6" x={112} y={127} width={80} height={38}
                 active={activeBlock === 'A² (×3)'} onClick={() => toggle('A² (×3)')} />
 
-              <Arrow x1={190} y1={74} x2={210} y2={100} />
-              <Arrow x1={190} y1={146} x2={210} y2={120} />
+              <Arrow x1={192} y1={74} x2={218} y2={100} />
+              <Arrow x1={192} y1={146} x2={218} y2={120} />
 
-              {/* Neck */}
-              <text x={280} y={16} textAnchor="middle" fill="rgba(245,158,11,0.7)" fontSize={8} fontFamily="var(--font-mono,monospace)" letterSpacing={2}>NECK (PAN + BiFPN)</text>
-              <ArchBlock label="AIFI" color="#F59E0B" x={210} y={55} width={70} height={38}
+              {/* Neck — col 2: x 218-298 */}
+              <text x={258} y={16} textAnchor="middle" fill="rgba(245,158,11,0.7)" fontSize={8} fontFamily="var(--font-mono,monospace)" letterSpacing={2}>NECK (PAN+BiFPN)</text>
+              <ArchBlock label="AIFI" color="#F59E0B" x={218} y={55} width={76} height={38}
                 active={activeBlock === 'AIFI'} onClick={() => toggle('AIFI')} />
-              <ArchBlock label="RepC3" color="#F59E0B" x={210} y={127} width={70} height={38}
+              <ArchBlock label="RepC3" color="#F59E0B" x={218} y={127} width={76} height={38}
                 active={activeBlock === 'RepC3'} onClick={() => toggle('AIFI')} />
 
-              <Arrow x1={280} y1={74} x2={300} y2={74} />
-              <Arrow x1={280} y1={146} x2={300} y2={146} />
-              <Arrow x1={280} y1={74} x2={300} y2={110} color="rgba(245,158,11,0.2)" />
-              <Arrow x1={280} y1={146} x2={300} y2={110} color="rgba(245,158,11,0.2)" />
+              <Arrow x1={294} y1={74} x2={320} y2={60} />
+              <Arrow x1={294} y1={74} x2={320} y2={110} color="rgba(245,158,11,0.2)" />
+              <Arrow x1={294} y1={146} x2={320} y2={160} />
+              <Arrow x1={294} y1={146} x2={320} y2={110} color="rgba(245,158,11,0.2)" />
 
-              {/* Heads */}
-              <text x={360} y={16} textAnchor="middle" fill="rgba(168,85,247,0.7)" fontSize={8} fontFamily="var(--font-mono,monospace)" letterSpacing={2}>DETECTION HEADS</text>
-              <ArchBlock label="P3" sublabel="small" color="#a78bfa" x={300} y={44} width={60} height={32}
+              {/* Detection Heads — col 3: x 320-388 */}
+              <text x={354} y={16} textAnchor="middle" fill="rgba(168,85,247,0.7)" fontSize={8} fontFamily="var(--font-mono,monospace)" letterSpacing={2}>DET. HEADS</text>
+              <ArchBlock label="P3" sublabel="small" color="#a78bfa" x={320} y={44} width={64} height={32}
                 active={activeBlock === 'P3/P4/P5'} onClick={() => toggle('P3/P4/P5')} />
-              <ArchBlock label="P4" sublabel="medium" color="#a78bfa" x={300} y={94} width={60} height={32}
+              <ArchBlock label="P4" sublabel="medium" color="#a78bfa" x={320} y={94} width={64} height={32}
                 active={activeBlock === 'P3/P4/P5'} onClick={() => toggle('P3/P4/P5')} />
-              <ArchBlock label="P5" sublabel="large" color="#a78bfa" x={300} y={144} width={60} height={32}
+              <ArchBlock label="P5" sublabel="large" color="#a78bfa" x={320} y={144} width={64} height={32}
                 active={activeBlock === 'P3/P4/P5'} onClick={() => toggle('P3/P4/P5')} />
 
-              <Arrow x1={360} y1={60} x2={390} y2={88} />
-              <Arrow x1={360} y1={110} x2={390} y2={110} />
-              <Arrow x1={360} y1={160} x2={390} y2={132} />
+              <Arrow x1={384} y1={60} x2={412} y2={72} />
+              <Arrow x1={384} y1={110} x2={412} y2={110} />
+              <Arrow x1={384} y1={160} x2={412} y2={148} />
 
-              {/* Outputs */}
-              <text x={460} y={16} textAnchor="middle" fill="rgba(34,197,94,0.7)" fontSize={8} fontFamily="var(--font-mono,monospace)" letterSpacing={2}>OUTPUTS</text>
-              <ArchBlock label="Detection" sublabel="bbox+conf" color="#22C55E" x={390} y={55} width={88} height={34}
+              {/* Outputs — col 4: x 412-544 */}
+              <text x={480} y={16} textAnchor="middle" fill="rgba(34,197,94,0.7)" fontSize={8} fontFamily="var(--font-mono,monospace)" letterSpacing={2}>OUTPUTS</text>
+              <ArchBlock label="Detection" sublabel="bbox+conf" color="#22C55E" x={412} y={55} width={100} height={34}
                 active={activeBlock === 'Detection'} onClick={() => toggle('Detection')} />
-              <ArchBlock label="Segmentation" sublabel="pixel mask" color="#22C55E" x={390} y={99} width={88} height={34}
+              <ArchBlock label="Segmentation" sublabel="pixel mask" color="#22C55E" x={412} y={99} width={100} height={34}
                 active={activeBlock === 'Segmentation'} onClick={() => toggle('Segmentation')} />
-              <ArchBlock label="Classification" sublabel="label+score" color="#22C55E" x={390} y={143} width={88} height={34}
+              <ArchBlock label="Classification" sublabel="label+score" color="#22C55E" x={412} y={143} width={100} height={34}
                 active={activeBlock === 'Detection'} onClick={() => toggle('Detection')} />
 
               {/* Separator lines */}
-              <line x1={200} y1={20} x2={200} y2={200} stroke="rgba(241,245,249,0.05)" strokeWidth={1} strokeDasharray="4 4" />
-              <line x1={295} y1={20} x2={295} y2={200} stroke="rgba(241,245,249,0.05)" strokeWidth={1} strokeDasharray="4 4" />
-              <line x1={385} y1={20} x2={385} y2={200} stroke="rgba(241,245,249,0.05)" strokeWidth={1} strokeDasharray="4 4" />
+              <line x1={206} y1={20} x2={206} y2={200} stroke="rgba(241,245,249,0.05)" strokeWidth={1} strokeDasharray="4 4" />
+              <line x1={310} y1={20} x2={310} y2={200} stroke="rgba(241,245,249,0.05)" strokeWidth={1} strokeDasharray="4 4" />
+              <line x1={402} y1={20} x2={402} y2={200} stroke="rgba(241,245,249,0.05)" strokeWidth={1} strokeDasharray="4 4" />
             </svg>
           </motion.div>
         </div>
