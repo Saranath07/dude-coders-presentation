@@ -4,7 +4,7 @@
  * Fonts: Fraunces (display) + JetBrains Mono (data) + DM Sans (body)
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,600;1,9..144,900&family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* ==============================
    CSS VARIABLES — DARK MODE (default)
@@ -43,9 +43,9 @@
   --border:         rgba(241, 245, 249, 0.07);
   --border-bright:  rgba(241, 245, 249, 0.13);
 
-  --font-display:   'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-display:   'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono:      'JetBrains Mono', 'Courier New', monospace;
-  --font-body:      'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body:      'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
   --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-out:       cubic-bezier(0.16, 1, 0.3, 1);
@@ -194,10 +194,10 @@ body::after {
    ============================== */
 .h-display {
   font-family: var(--font-display);
-  font-weight: 900;
-  font-style: italic;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
   color: var(--text-primary);
 }
 

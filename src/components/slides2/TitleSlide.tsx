@@ -1,246 +1,141 @@
 import { motion } from 'framer-motion';
-import { useEffect, useRef } from 'react';
-
-const SunOrbit = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d')!;
-    let raf: number;
-    let t = 0;
-
-    const draw = () => {
-      const W = canvas.width, H = canvas.height;
-      ctx.clearRect(0, 0, W, H);
-      const cx = W / 2, cy = H / 2;
-      const pulse = 0.5 + 0.5 * Math.sin(t * 0.025);
-
-      // Orbit ring 1
-      ctx.beginPath();
-      ctx.ellipse(cx, cy, 200, 70, -0.25, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(245,158,11,${0.14 + pulse * 0.06})`;
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
-
-      // Orbit ring 2
-      ctx.beginPath();
-      ctx.ellipse(cx, cy, 300, 105, -0.25, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(20,184,166,${0.09 + pulse * 0.04})`;
-      ctx.lineWidth = 1;
-      ctx.stroke();
-
-      // Orbit ring 3
-      ctx.beginPath();
-      ctx.ellipse(cx, cy, 410, 145, -0.25, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(245,158,11,${0.05 + pulse * 0.02})`;
-      ctx.lineWidth = 0.8;
-      ctx.stroke();
-
-      // Trailing tail for ring 1 satellite
-      const a1 = t * 0.013;
-      for (let i = 0; i < 10; i++) {
-        const ta = a1 - i * 0.04;
-        const tx = cx + Math.cos(ta) * 200;
-        const ty = cy + Math.sin(ta) * 70;
-        ctx.beginPath();
-        ctx.arc(tx, ty, 3.5 - i * 0.28, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(245,158,11,${(0.8 - i * 0.07)})`;
-        ctx.fill();
-      }
-      // Dot on ring 1
-      const dx1 = cx + Math.cos(a1) * 200;
-      const dy1 = cy + Math.sin(a1) * 70;
-      ctx.beginPath();
-      ctx.arc(dx1, dy1, 5, 0, Math.PI * 2);
-      ctx.fillStyle = '#FCD34D';
-      ctx.shadowColor = '#F59E0B';
-      ctx.shadowBlur = 18;
-      ctx.fill();
-      ctx.shadowBlur = 0;
-
-      // Trailing tail for ring 2 satellite
-      const a2 = -t * 0.008 + 1.2;
-      for (let i = 0; i < 8; i++) {
-        const ta = a2 + i * 0.04;
-        const tx = cx + Math.cos(ta) * 300;
-        const ty = cy + Math.sin(ta) * 105;
-        ctx.beginPath();
-        ctx.arc(tx, ty, 3 - i * 0.27, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(20,184,166,${0.7 - i * 0.08})`;
-        ctx.fill();
-      }
-      // Dot on ring 2
-      const dx2 = cx + Math.cos(a2) * 300;
-      const dy2 = cy + Math.sin(a2) * 105;
-      ctx.beginPath();
-      ctx.arc(dx2, dy2, 4, 0, Math.PI * 2);
-      ctx.fillStyle = '#2DD4BF';
-      ctx.shadowColor = '#14B8A6';
-      ctx.shadowBlur = 14;
-      ctx.fill();
-      ctx.shadowBlur = 0;
-
-      // Dot on ring 3
-      const a3 = t * 0.006 + 2.4;
-      const dx3 = cx + Math.cos(a3) * 410;
-      const dy3 = cy + Math.sin(a3) * 145;
-      ctx.beginPath();
-      ctx.arc(dx3, dy3, 3, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(245,158,11,${0.5 + pulse * 0.3})`;
-      ctx.shadowColor = '#F59E0B';
-      ctx.shadowBlur = 8;
-      ctx.fill();
-      ctx.shadowBlur = 0;
-
-      // Center sun outer glow (breathing)
-      const outerGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 80 + pulse * 16);
-      outerGrad.addColorStop(0, `rgba(245,158,11,${0.20 + pulse * 0.08})`);
-      outerGrad.addColorStop(0.5, `rgba(245,158,11,${0.08 + pulse * 0.04})`);
-      outerGrad.addColorStop(1, 'transparent');
-      ctx.beginPath();
-      ctx.arc(cx, cy, 80 + pulse * 16, 0, Math.PI * 2);
-      ctx.fillStyle = outerGrad;
-      ctx.fill();
-
-      // Center sun
-      const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 36 + pulse * 6);
-      grad.addColorStop(0, '#FDE68A');
-      grad.addColorStop(0.4, '#F59E0B');
-      grad.addColorStop(0.8, 'rgba(245,158,11,0.4)');
-      grad.addColorStop(1, 'transparent');
-      ctx.beginPath();
-      ctx.arc(cx, cy, 36 + pulse * 6, 0, Math.PI * 2);
-      ctx.fillStyle = grad;
-      ctx.shadowColor = '#F59E0B';
-      ctx.shadowBlur = 40 + pulse * 20;
-      ctx.fill();
-      ctx.shadowBlur = 0;
-
-      // Sunray spokes
-      const numRays = 8;
-      for (let i = 0; i < numRays; i++) {
-        const angle = (i / numRays) * Math.PI * 2 + t * 0.006;
-        const r0 = 20, r1 = 55 + pulse * 12;
-        ctx.beginPath();
-        ctx.moveTo(cx + r0 * Math.cos(angle), cy + r0 * Math.sin(angle));
-        ctx.lineTo(cx + r1 * Math.cos(angle), cy + r1 * Math.sin(angle));
-        ctx.strokeStyle = `rgba(245,158,11,${0.12 + 0.07 * Math.sin(t * 0.05 + i)})`;
-        ctx.lineWidth = 1.2;
-        ctx.stroke();
-      }
-
-      t++;
-      raf = requestAnimationFrame(draw);
-    };
-
-    draw();
-    return () => cancelAnimationFrame(raf);
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      width={900}
-      height={320}
-      style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', opacity: 0.92 }}
-    />
-  );
-};
-
-const EASE_OUT = [0.16, 1, 0.3, 1] as const;
-
-const stagger = {
-  visible: { transition: { staggerChildren: 0.14, delayChildren: 0.1 } },
-};
-const item = {
-  hidden: { opacity: 0, y: 32, scale: 0.97, filter: 'blur(4px)' },
-  visible: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', transition: { duration: 0.8, ease: EASE_OUT } },
-};
+import { Sun } from 'lucide-react';
 
 const TitleSlide = () => (
   <div className="slide">
     <div className="glow-amber-center" />
+    <div className="slide-inner" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0 }}>
 
-    {/* Canvas orbit */}
-    <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <SunOrbit />
-    </div>
-
-    <motion.div
-      className="slide-inner"
-      style={{ textAlign: 'center', position: 'relative', zIndex: 10 }}
-      initial="hidden"
-      animate="visible"
-      variants={stagger}
-    >
       {/* Logos */}
-      <motion.div variants={item} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 64, marginBottom: 56 }}>
-        <img src={`${import.meta.env.BASE_URL}global-learning.png`} alt="Global Learning" style={{ height: 72, objectFit: 'contain', opacity: 0.85 }} />
-        <img src={`${import.meta.env.BASE_URL}India-AI-Impact-Summit-2026.png`} alt="AI Impact Summit 2026" style={{ height: 96, objectFit: 'contain', opacity: 0.9 }} />
-        <img src={`${import.meta.env.BASE_URL}iitm_logo.png`} alt="IITM Logo" style={{ height: 72, objectFit: 'contain', opacity: 0.85 }} />
+      <motion.div
+        initial={{ opacity: 0, y: -24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 80, marginBottom: 28 }}
+      >
+        <img src={`${import.meta.env.BASE_URL}global-learning.png`} alt="Global Learning" style={{ height: 84, objectFit: 'contain' }} />
+        <img src={`${import.meta.env.BASE_URL}India-AI-Impact-Summit-2026.png`} alt="AI Impact Summit 2026" style={{ height: 110, objectFit: 'contain' }} />
+        <img src={`${import.meta.env.BASE_URL}iitm_logo.png`} alt="IITM Logo" style={{ height: 84, objectFit: 'contain' }} />
+      </motion.div>
+
+      {/* Animated Sun */}
+      <motion.div
+        initial={{ scale: 0, rotate: -180 }}
+        animate={{ scale: 1, rotate: 0 }}
+        transition={{ duration: 0.9, ease: 'easeOut' }}
+        style={{ marginBottom: 18 }}
+      >
+        <motion.div animate={{ rotate: 360 }} transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}>
+          <Sun size={72} color="var(--amber)" strokeWidth={1.5} style={{ filter: 'drop-shadow(0 0 20px rgba(245,158,11,0.6))' }} />
+        </motion.div>
       </motion.div>
 
       {/* Event label */}
-      <motion.div variants={item} style={{ marginBottom: 20 }}>
-        <span className="label-mono" style={{ fontSize: '1.0rem', color: 'var(--teal)' }}>
-          EcoInnovators Ideathon 2026 · AI For A Better Earth
-        </span>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+        style={{ marginBottom: 16 }}
+      >
+        <div className="label-mono" style={{ fontSize: '1.0rem', marginBottom: 5 }}>AI For A Better Earth</div>
+        <div style={{
+          fontFamily: 'var(--font-display)',
+          fontWeight: 700,
+          fontSize: 'clamp(1.4rem, 2.0vw, 1.9rem)',
+          color: 'var(--text-primary)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.08em',
+          lineHeight: 1.1,
+        }}>
+          EcoInnovators Ideathon 2026
+        </div>
       </motion.div>
 
       {/* Main title */}
       <motion.h1
-        variants={item}
-        className="h-display"
+        initial={{ opacity: 0, y: 36 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.45, duration: 0.7 }}
         style={{
-          fontSize: 'clamp(5rem, 9vw, 10rem)',
-          background: 'linear-gradient(135deg, #FCD34D 0%, #F59E0B 45%, #fff 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
+          fontFamily: 'var(--font-display)',
+          fontWeight: 700,
+          fontSize: 'clamp(2.8rem, 4.6vw, 4.8rem)',
+          lineHeight: 1.0,
+          letterSpacing: '-0.02em',
+          color: 'var(--text-primary)',
           marginBottom: 12,
-          lineHeight: 0.92,
         }}
       >
-        SolarSight
+        Advanced Solar Panel<br />
+        <span style={{ color: 'var(--amber)' }}>Detection System</span>
       </motion.h1>
 
       {/* Subtitle */}
       <motion.p
-        variants={item}
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6, duration: 0.6 }}
         style={{
-          fontFamily: 'var(--font-display)',
-          fontStyle: 'italic',
-          fontWeight: 300,
-          fontSize: 'clamp(1.6rem, 2.6vw, 2.4rem)',
-          color: 'var(--text-secondary)',
-          marginBottom: 40,
-          letterSpacing: '-0.01em',
+          fontFamily: 'var(--font-body)',
+          fontSize: 'clamp(1.2rem, 1.8vw, 1.6rem)',
+          color: 'var(--teal-bright)',
+          marginBottom: 28,
+          lineHeight: 1.4,
         }}
       >
-        AI-Powered Solar Intelligence for a Planet That Can't Afford to Guess
+        A Multi-Stage Deep Learning Approach
       </motion.p>
 
-      {/* Team badge */}
-      <motion.div variants={item} style={{ display: 'flex', justifyContent: 'center', gap: 12, marginBottom: 20 }}>
+      {/* Team card */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.75, duration: 0.5 }}
+        style={{
+          padding: '14px 48px',
+          background: 'var(--amber-dim)',
+          border: '1.5px solid var(--amber-border)',
+          borderRadius: 16,
+          marginBottom: 16,
+          boxShadow: '0 0 32px rgba(245,158,11,0.1)',
+        }}
+      >
+        <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '1.3rem', color: 'var(--amber-bright)', letterSpacing: '0.08em' }}>
+          Team Dude Coders
+        </div>
+      </motion.div>
+
+      {/* Team members */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.9, duration: 0.6 }}
+        style={{ display: 'flex', gap: 48, justifyContent: 'center', color: '#94A3B8', fontSize: '1.2rem', fontWeight: 500 }}
+      >
         {['S Shriprasad', 'P Saranath', 'B Shruthi'].map(name => (
-          <span
-            key={name}
-            className="badge badge-amber"
-            style={{ fontSize: '1.0rem' }}
-          >
-            {name}
-          </span>
+          <span key={name} style={{ fontFamily: 'var(--font-body)' }}>{name}</span>
         ))}
       </motion.div>
 
-      <motion.div variants={item}>
-        <span className="label-mono" style={{ color: 'var(--text-muted)', fontSize: '0.92rem' }}>
-          IIT Madras · India AI Impact Summit 2026
-        </span>
-      </motion.div>
-    </motion.div>
+      {/* Floating particles */}
+      {[...Array(6)].map((_, i) => (
+        <motion.div
+          key={i}
+          style={{
+            position: 'absolute',
+            width: 4,
+            height: 4,
+            background: 'var(--amber)',
+            borderRadius: '50%',
+            boxShadow: '0 0 12px var(--amber)',
+            left: `${12 + i * 14}%`,
+            bottom: '15%',
+          }}
+          animate={{ y: [-20, -70, -20], opacity: [0.2, 1, 0.2] }}
+          transition={{ duration: 3 + i * 0.6, repeat: Infinity, ease: 'easeInOut', delay: i * 0.3 }}
+        />
+      ))}
+    </div>
   </div>
 );
 

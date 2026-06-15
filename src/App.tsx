@@ -2,42 +2,22 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useCallback, useRef } from 'react';
 
 import StarField from './components/StarField';
-import TitleSlide      from './components/slides2/TitleSlide';
-import SolarBoomSlide  from './components/slides2/SolarBoomSlide';
-import HiddenCrisisSlide from './components/slides2/HiddenCrisisSlide';
-import SolutionSlide   from './components/slides2/SolutionSlide';
-import YOLOSlide       from './components/slides2/YOLOSlide';
-import DataEngineSlide from './components/slides2/DataEngineSlide';
-import CascadeSlide    from './components/slides2/CascadeSlide';
-import OutputSlide     from './components/slides2/OutputSlide';
-import PerformanceSlide from './components/slides2/PerformanceSlide';
-import BenchmarksSlide from './components/slides2/BenchmarksSlide';
-import EconomicsSlide  from './components/slides2/EconomicsSlide';
-import FutureSlide     from './components/slides2/FutureSlide';
-import MultiModalSlide from './components/slides2/MultiModalSlide';
-import RoadmapSlide    from './components/slides2/RoadmapSlide';
-import DemoSlide       from './components/slides2/DemoSlide';
-import ConclusionSlide from './components/slides2/ConclusionSlide';
+import TitleSlide        from './components/slides2/TitleSlide';
+import ProblemSlide      from './components/slides2/ProblemSlide';
+import DemoSlide         from './components/slides2/DemoSlide';
+import ArchitectureSlide from './components/slides2/ArchitectureSlide';
+import ComparisonSlide   from './components/slides2/ComparisonSlide';
+import FutureSlide       from './components/slides2/FutureSlide';
 
 import './styles/heliograph.css';
 
 const slides = [
-  { component: TitleSlide,       label: 'Title' },
-  { component: SolarBoomSlide,   label: 'Solar Boom' },
-  { component: HiddenCrisisSlide,label: 'Hidden Crisis' },
-  { component: SolutionSlide,    label: 'Solution' },
-  { component: YOLOSlide,        label: 'YOLOv12' },
-  { component: DataEngineSlide,  label: 'Data Engine' },
-  { component: CascadeSlide,     label: 'Cascade' },
-  { component: OutputSlide,      label: 'Output' },
-  { component: PerformanceSlide, label: 'Performance' },
-  { component: BenchmarksSlide,  label: 'Benchmarks' },
-  { component: EconomicsSlide,   label: 'Economics' },
-  { component: FutureSlide,      label: 'Future' },
-  { component: MultiModalSlide,  label: 'Multi-Modal' },
-  { component: RoadmapSlide,     label: 'Roadmap' },
-  { component: DemoSlide,        label: 'Demo' },
-  { component: ConclusionSlide,  label: 'Conclusion' },
+  { component: TitleSlide,        label: 'Title' },
+  { component: ProblemSlide,      label: 'Problem' },
+  { component: DemoSlide,         label: 'Demo' },
+  { component: ArchitectureSlide, label: 'Architecture' },
+  { component: ComparisonSlide,   label: 'Comparison' },
+  { component: FutureSlide,       label: 'Future Works' },
 ];
 
 const EASE_OUT  = [0.16, 1, 0.3, 1] as const;
