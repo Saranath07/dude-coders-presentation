@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Sun } from 'lucide-react';
+import TeamQRs from '../TeamQRs';
 
 const TitleSlide = () => (
   <div className="slide">
@@ -115,6 +116,16 @@ const TitleSlide = () => (
         {['S Shriprasad', 'P Saranath', 'B Shruthi'].map(name => (
           <span key={name} style={{ fontFamily: 'var(--font-body)' }}>{name}</span>
         ))}
+      </motion.div>
+
+      {/* LinkedIn QRs */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.1, duration: 0.6 }}
+        style={{ marginTop: 20 }}
+      >
+        <TeamQRs size={72} />
       </motion.div>
 
       {/* Floating particles */}

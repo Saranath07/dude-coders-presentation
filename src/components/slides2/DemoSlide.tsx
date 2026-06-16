@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { MapPin, Satellite, Bot, CheckSquare } from 'lucide-react';
+import TeamQRs from '../TeamQRs';
 
 const steps = [
   { Icon: MapPin,    label: 'Input',   val: 'GPS coordinate (lat, lon)',           color: 'var(--amber)' },
@@ -106,6 +107,19 @@ const DemoSlide = () => (
           >
             ↗ GitHub
           </a>
+        </motion.div>
+
+        {/* LinkedIn QRs */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.5 }}
+          style={{ marginTop: 8 }}
+        >
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: 'var(--text-muted)', letterSpacing: '0.1em', textAlign: 'center', marginBottom: 10 }}>
+            CONNECT WITH US
+          </div>
+          <TeamQRs size={72} />
         </motion.div>
       </motion.div>
 
