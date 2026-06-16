@@ -14,10 +14,10 @@ import './styles/heliograph.css';
 const slides = [
   { component: TitleSlide,        label: 'Title' },
   { component: ProblemSlide,      label: 'Problem' },
-  { component: DemoSlide,         label: 'Demo' },
   { component: ArchitectureSlide, label: 'Architecture' },
   { component: ComparisonSlide,   label: 'Comparison' },
-  { component: FutureSlide,       label: 'Future Works' },
+  { component: FutureSlide,       label: 'Future Works — Beyond RGB' },
+  { component: DemoSlide,         label: 'Demo' },
 ];
 
 const EASE_OUT  = [0.16, 1, 0.3, 1] as const;

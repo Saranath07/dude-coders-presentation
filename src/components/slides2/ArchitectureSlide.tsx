@@ -2,12 +2,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
 const stages = [
-  { n: 1, name: 'Standard Full-Image',  method: 'model.predict(img, conf=0.20)',      buffer: '1,200 sqft', boost: false, crop: false, color: 'var(--amber)', free: false },
-  { n: 2, name: 'Saturation Boost',     method: 'HSV[:,:,1] × 1.5 → predict',        buffer: '1,200 sqft', boost: true,  crop: false, color: 'var(--amber)', free: false },
-  { n: 3, name: 'Crop to Buffer',       method: 'image[cy±r₁] → predict',             buffer: '1,200 sqft', boost: false, crop: true,  color: 'var(--teal)',  free: false },
-  { n: 4, name: 'Saturated Crop',       method: 'saturate(crop) → predict',           buffer: '1,200 sqft', boost: true,  crop: true,  color: 'var(--teal)',  free: false },
-  { n: 5, name: 'Re-check Step 1 @ r₂', method: 'reuse Step 1 detections (free)',     buffer: '2,400 sqft', boost: false, crop: false, color: '#a78bfa',      free: true },
-  { n: 6, name: 'Re-check Step 2 @ r₂', method: 'reuse Step 2 detections (free)',     buffer: '2,400 sqft', boost: true,  crop: false, color: '#a78bfa',      free: true },
+  { n: 1, name: 'Standard Full-Image',   method: 'model.predict(img, conf=0.20)', buffer: '1,200 sqft', boost: false, crop: false, color: '#F59E0B', numColor: '#F59E0B' },
+  { n: 2, name: 'Saturation Boost',      method: 'HSV[:,:,1] × 1.5 → predict',   buffer: '1,200 sqft', boost: true,  crop: false, color: '#FB923C', numColor: '#FB923C' },
+  { n: 3, name: 'Crop to Buffer',        method: 'image[cy±r₁] → predict',        buffer: '1,200 sqft', boost: false, crop: true,  color: '#14B8A6', numColor: '#14B8A6' },
+  { n: 4, name: 'Saturated Crop',        method: 'saturate(crop) → predict',      buffer: '1,200 sqft', boost: true,  crop: true,  color: '#2DD4BF', numColor: '#2DD4BF' },
+  { n: 5, name: 'Re-check Step 1 @ r₂', method: 'reuse Step 1 detections',        buffer: '2,400 sqft', boost: false, crop: false, color: '#A78BFA', numColor: '#A78BFA' },
+  { n: 6, name: 'Re-check Step 2 @ r₂', method: 'reuse Step 2 detections',        buffer: '2,400 sqft', boost: true,  crop: false, color: '#C4B5FD', numColor: '#C4B5FD' },
 ];
 
 // Each stage renders a completely different scene
@@ -381,7 +381,7 @@ const ArchitectureSlide = () => {
               The 6-Stage{' '}
               <span style={{ color: 'var(--amber)' }}>Fallback Cascade</span>
             </h2>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.05rem', color: '#CBD5E1', marginTop: 8, lineHeight: 1.6 }}>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.15rem', color: '#CBD5E1', marginTop: 8, lineHeight: 1.6 }}>
               Each stage runs only if the previous fails. Steps 5 & 6 are free — cached detections re-evaluated at larger radius.
             </p>
           </motion.div>
@@ -398,9 +398,9 @@ const ArchitectureSlide = () => {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 12,
-                  padding: '10px 14px',
-                  borderRadius: 10,
+                  gap: 16,
+                  padding: '15px 18px',
+                  borderRadius: 12,
                   background: active === i ? 'var(--bg-elevated)' : 'var(--bg-card)',
                   border: `1.5px solid ${active === i ? stage.color + '77' : 'var(--border)'}`,
                   cursor: 'pointer',
@@ -409,25 +409,22 @@ const ArchitectureSlide = () => {
               >
                 {/* Stage bubble */}
                 <div style={{
-                  width: 28, height: 28, borderRadius: '50%', flexShrink: 0,
-                  background: active === i ? stage.color : 'transparent',
-                  border: `2px solid ${stage.color}`,
+                  width: 34, height: 34, borderRadius: '50%', flexShrink: 0,
+                  background: active === i ? stage.numColor : stage.numColor + '22',
+                  border: `2px solid ${stage.numColor}`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: 700,
-                  color: active === i ? '#000' : stage.color,
+                  fontFamily: 'var(--font-mono)', fontSize: '0.95rem', fontWeight: 700,
+                  color: active === i ? '#000' : stage.numColor,
                   transition: 'all 0.25s',
                 }}>
                   {stage.n}
                 </div>
 
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontFamily: 'var(--font-body)', fontSize: '1.0rem', fontWeight: 600, color: 'var(--text-primary)', display: 'flex', gap: 6, alignItems: 'center' }}>
+                  <div style={{ fontFamily: 'var(--font-body)', fontSize: '1.2rem', fontWeight: 600, color: 'var(--text-primary)', display: 'flex', gap: 6, alignItems: 'center' }}>
                     {stage.name}
-                    {stage.free && (
-                      <span className="badge badge-teal" style={{ fontSize: '0.6rem', padding: '1px 6px' }}>FREE</span>
-                    )}
                   </div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: 1 }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.95rem', color: '#94A3B8', marginTop: 3 }}>
                     {stage.method}
                   </div>
                 </div>
@@ -463,7 +460,7 @@ const ArchitectureSlide = () => {
                   { l: 'Buffer',    v: s.buffer },
                   { l: 'Boost',     v: s.boost ? 'HSV ×1.5' : 'Off' },
                   { l: 'Crop',      v: s.crop ? 'Active' : 'Off' },
-                  { l: 'Inference', v: s.free ? 'Cached ✓' : 'New call' },
+                  { l: 'Inference', v: s.n >= 5 ? 'Cached ✓' : 'New call' },
                 ].map(kv => (
                   <div key={kv.l} style={{ background: 'var(--bg-surface)', borderRadius: 6, padding: '7px 9px' }}>
                     <div className="stat-label" style={{ fontSize: '0.62rem' }}>{kv.l}</div>
@@ -494,7 +491,7 @@ const ArchitectureSlide = () => {
               <div style={{ color: 'var(--amber)', fontFamily: 'var(--font-mono)', fontSize: '1.2rem', fontWeight: 700 }}>→</div>
               <div style={{ textAlign: 'center' }}>
                 <div className="stat-label" style={{ fontSize: '0.7rem' }}>Cascade F1</div>
-                <div className="stat-num" style={{ fontSize: '1.6rem' }}>0.95</div>
+                <div className="stat-num" style={{ fontSize: '1.6rem', color: 'var(--green)' }}>0.95</div>
               </div>
             </div>
           </div>
